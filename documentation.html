@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Project 1 - Documentation</title>
+	<style>
+		body{
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+    	
+		.container{
+			width: 70%;
+			margin:auto;
+		}
+		.container2{
+			width: 50%;
+			margin:auto;
+			position:relative;
+		}
+		.theVideo{
+			position:absolute;
+			  left:50%;
+			  transform: translateX(-50%);
+			  -webkit-transform: translateX(-50%);
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+  <h1 style="text-align:center">Documentation </h1>
+  <h3>Design Process </h3>
+  <p>My design process was a step-by-step approach. The first step was to get a working bar chart. After that, I pondered on how I could represent different countries and different variables. I figured having too many bars in one chart would make it all confusing, so I focused on representing the differences between countries for the same variable, since I thought comparing how different countries perform against other countries was more relevant than simply comparing how one country is doing for different variables (given there are 233 countries in the dataset). After I got the bar chart showing the data that I wanted, I moved on to the line chart. Line charts are pretty self explanatory, they're lines connecting different coordinates. For the line and the bar chart, time was the x-axis, so only one other variable(y axis) could be displayed. Complementing the bar chart and line chart, I believed it would be informative for the user to be able to hover on any given data, and see more details about the data. (e.g. The user can see exact values at each data point). After getting the bar chart and line chart down, I started the scatterplot. Scatterplots are simple in the way that they represent 2 variables, one in the x-axis and another in the y-axis. So I gave the user the ability to choose which two files he/she wants plotted in the scatterplot. Another variable added to the scatterplot is time. The user can use a range selector to go through the years(1980-2012).</p>
+<h3> Design Rationale</h3>
+<p>For the bar chart and line chart, I used different colors to represent different countries because, as I said, I believe the difference between the countries is more relevant for this data analysis. I also grouped the bar charts by year, so for the same year, you can see the data from two countries side by side, rather than having them separate. For two different variables, however, the data is displayed in two different charts because, once again, I prioritized the difference between the country data rather than the difference between the variables for a given country. <br>
+  The line chart is more flexible in that it can display more countries without polluting the graph too much. There is still, a limit to how many countries can be clearly displayed in the chart, but I find that the line chart is better for multiple country comparison.<br>
+  The scatterplot represents 233 different countries. Obviously, you can't clearly see every single country, but you can see the countries that stand out for 2 given variables. I've also provided some help by giving the user the ability to hover over a dot, and see which country it is. </p>
+<h3>Exploratory Analysis</h3>
+<p>I've found out that while Asia &amp; Oceania are the biggest generators and consumers of electricity by far, they weren't always like that. If you explore back to 1980 when the data first starts, you can see that Asia &amp; Oceania are only the 5th largest electricity consumer/producer, producing/consuming less than half of North America. From 1980-2000 it gradually increases it's electricity consumption/production, but it's only after the 21st century when it sky rockets in electricity consumption/production, blasting past North America(the former top 1), and reaching nearly double the value of North America in 2012. <br>
+  Another pertinent fact regarding electricity consumption/production is the USSR. 	From 1980 up until 1991, you can see the USSR as one of the big data points in the scatterplot, but after 1992, the USSR disappears. I found it weird that such a data point in the top 10 would suddenly disappear. That's when I found out that the USSR was dissolved on December 26, 1991. Which now gives a lot of meaningful sense into this scatterplot and what it represents.</p>
+
+ </div>
+ <div class="container2">
+ 	<h2 style= "text-align: center;"> Video </h2>
+	 	<iframe width="1080" height="720" class="theVideo"
+		src="https://www.youtube.com/embed/b0cEVisaZkg">
+</iframe>
+ </div>
+</body>
+
+
+</html>
