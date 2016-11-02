@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Small Multiple View</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+	<script src="https://d3js.org/d3.v4.js"></script><!-- added by divi -->
+	<link rel="stylesheet" href="normalize.css"><!-- added by divi -->
+	<style type="text/css">
+	
+	/* On mouse hover, lighten state color */
+	#main path:hover {
+		fill-opacity: .6;
+	}
+
+	.rect:hover {
+		fill-opacity: .8;
+	}
+	
+	/* Style for Custom Tooltip */
+	div.tooltip {   
+	 	position: absolute;           
+		text-align: center;           
+		width: 60px;                  
+		height: 28px;                 
+		padding: 2px;             
+		font: 12px sans-serif;        
+		background: white;   
+		border: 0px;      
+		border-radius: 8px;           
+		pointer-events: none;         
+	}
+	        
+	/* Legend Font Style */
+	body {
+		font: 11px sans-serif;
+	}
+	        
+	/* Legend Position Style */
+	.legend {
+		position:absolute;
+		left:800px;
+		top:350px;
+	}
+	
+	.arc text {
+	  font: 10px sans-serif;
+	  text-anchor: middle;
+	}
+
+	.arc path {
+	  stroke: #fff;
+	}
+
+	.maps{
+		float:left;
+	}	
+	
+	.chart rect {
+		fill: steelblue;
+	}
+
+	/* Divi Changes Begin here */
+	.pie-area {
+			height: 350px;
+			margin: 20 auto auto auto;
+			position: relative;
+			width: 350px;
+		}
+		/*Transport PieChart ToolTipBox*/
+		
+		.pie-tooltip {
+			position: absolute;
+			width: 250px;
+			height: 340px;
+			padding-left: 20px;
+			padding-left: 20px;
+			border-radius: 8px;
+			background: white;
+			border: 0px;
+			
+			pointer-events: none;
+		}
+		
+		.Time-pie-tooltip {
+			position: absolute;
+			width: 350px;
+			height: 420px;
+			padding: 1px;
+			background: white;
+			border: 0px;
+			padding-left: 20px;
+			padding-left: 20px;
+			border-radius: 8px;
+			pointer-events: none;
+		}
+		
+		#transportmap .tooltip {
+			background: #eee;
+			box-shadow: 0 0 5px #999999;
+			color: #333;
+			display: none;
+			font-size: 12px;
+			left: 130px;
+			padding: 10px;
+			position: absolute;
+			text-align: center;
+			top: 95px;
+			width: 80px;
+			z-index: 10;
+		}
+		
+		#household {
+			text-align: center;
+		}
+		/*TransPieChartAreaStyles*/
+		
+		.legend {
+			font-size: 14px;
+		}
+		/*TransPieChartAreaStyles*/
+		
+		rect {
+			cursor: pointer;
+			stroke-width: 2;
+		}
+		/*TransPieChartAreaStyles */
+		
+		rect.disabled {
+			fill: transparent !important;
+		}
+		/*TransPieChartAreaStyles */
+		
+		h1 {
+			font-size: 10px;
+			text-align: center;
+		}
+		
+		#xaxis .domain {
+			fill: none;
+			stroke: #000;
+		}
+		
+		#xaxis text,
+		#yaxis text {
+			font-size: 12px;
+		}
+		
+		#wrapper {
+			position: relative;
+			margin-top: 700px;
+		}
+		
+		#single-chart {
+			float: left;
+			margin: 0 0 10px 10px;
+		}
+		
+		.bar {
+			fill: steelblue;
+		}
+	/*Divi Changes end here */
+
+	</style>
+</head>
+<body>
+	<select multiple id="variableSelection1" style="height: 150px; position: relative; left: 20px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection2" style="height: 150px;position: relative; left: 30px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection3" style="height: 150px;position: relative; left: 40px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection4" style="height: 150px;position: relative; left: 50px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection5" style="height: 150px;position: relative; left: 60px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection6" style="height: 150px;position: relative; left: 70px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection7" style="height: 150px;position: relative; left: 80px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<select multiple id="variableSelection8" style="height: 150px;position: relative; left: 90px; top: 50px">
+	  <option value="0">Total Population</option>
+	  <option value="1">Loneliness</option>
+	  <option value="2">Loneliness 18-34</option>
+	  <option value="3">Loneliness 35-64</option>
+	  <option value="4">Loneliness 65+</option>
+	  <option value="5">Foreigners</option>
+	  <option value="6">Less than High School</option>
+	  <option value="7">High School Graduate</option>
+	  <option value="8">College | Associate Degree</option>
+	  <option value="9">Bachelors Degree</option>
+	  <option value="10">Graduate Students</option>
+	  <option value="11">Per Capita Income</option>
+	  <option value="12">Median Household Income</option>
+	</select>
+	<button id="doIt" style="position: absolute; top: 220px; left: 500px;"> Map! </button>
+	<text id="test" style="position: absolute; left: 20px; top: 30px"> Choose Your Options</text>
+	<div id="map" style="position: relative; top: 100px" >
+	<div class="tinyMaps">
+		
+	</div>
+	</div>
+	
+	<script>
+	
+	var AllStatesData = [];
+	var MapWidth = 700;
+	var MapHeight = 365;
+	var PieChartWidth = 450;
+	var PieChartHeight = 250;
+	var BarChartWidth = 400;
+	var BarChartHeight = 300;
+	var Default = 999;
+	var MaxVal;
+	var MinVal;
+	var DefaultColor = [];
+	var TotalPopulation = 1;
+	var SexDisMale = 2;
+	var SexDistFemale = 3;
+	var MedianAgeTot = 4;
+	var MedianAgeMale = 5;
+	var MedianAgeFemale = 6;
+	var LiveAlone = 7;
+	var LiveWithSpouse = 8;
+	var LiveWithPartner = 9;
+	var HavingChild = 10;
+	var LiveOtherRelative = 11;
+	var LiveNonRelative = 12;
+	var TotByNat = 43;
+	var ForeignBorn = 44;
+	var lonely = [];
+	var foreigners = [];
+	var sexdist = [];
+	//Divi Changes Begin here 
+	var TransportData =[];
+	var TimeToTravelData=[];
+	var TransMaxVal;
+	var TransMinVal;
+	var pieChartLocationX = 700;
+	var pieChartLocationY = 100;
+	var tinyMapLabel=[];
+	//Divi changes end here
+	var myColors = 	[["rgb(231,225,239)","rgb(166,189,219)","rgb(28,144,153)"],//Total Population
+					 ["rgb(247,104,161)","rgb(254,235,226)","rgb(241,238,246)","rgb(4,90,141)"], //Sex Distribution Male and Female
+					 ["rgb(229,245,249)","rgb(44,162,95)"], // Loneliness
+					 ["rgb(229,245,249)","rgb(153,216,201)","rgb(44,162,95)"], //Median Age	
+					 ["rgb(254,224,210)","rgb(252,146,114)","rgb(222,45,38)"], // Transport **Divi**
+					 ["rgb(154,224,210)","rgb(152,146,114)","rgb(122,45,38)"] //Time to travel	 **Divi** 
+					];
+					
+	var myPieChartColors = [ ["rgb(254,235,226)","rgb(241,238,246)"],//Pie Chart Color for Sex Distribution
+							 ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]// Pie Chart for Lonliness
+						   ];
+
+	var q = d3.queue()
+    //0. States
+	.defer(d3.json, "us-states.json")
+	//1. Total Population
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //2. Sex Distribution-Male
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01001_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //3. Sex Distribution-Female
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01001_026E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//4. Median Age-Total
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//5. Median Age-Male
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//6. Median Age- Female
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//7. Lives Alone
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//8.  "Householder Living With Spouse or vice-versa";
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//9. Householder Living With Unmarried Partner or vice-versa
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//10. Child of Householder
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//11. Other Relatives
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//12. Other Nonrelatives
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//Divi Changes bein here 
+	//13. Transport
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //14. driving car alone
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //15. Carpool
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //16. TransportPublic
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //17. TransportTaxiCab
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //18. TransportMotorCycle
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_017E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //19. TransportBicycle
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //20. TransportWalked
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_019E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //21. TransportOtherMeans
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_020E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //22. TransportWorkedAtHome
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_021E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//23. Median Household income
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19013_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	 //24. carpool 2
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //25. carpool 3
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //26. carpool 4
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //27. carpool 5 and 6
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//28. carpool 7
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	 //29. to travel Total
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //30. to travel Less than 5 minutes 
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //31. to travel 5 to 9 Minutes
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //32. to travel 10 to 14 Minutes
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //33. to travel 15 to 19 Minutes
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //34. to travel 20 to 24 Minutes
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //35. to travel 25 to 29 Minutes
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //36. to travel 30 to 34 Minutes
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //37. to travel 35 to 39 Minutes
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //38. to travel 40 to 44 Minutes
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //39. to travel 45 to 59 Minutes
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_011E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//40. to travel 60 to 89 Minutes
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    //41. to travel 90 or More Minutes
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_013E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//Divi changes end here 
+	//42. Per Capita Income
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//43. Total Population by Place of Nativity
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,C05002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//44. Foreign Born
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,C05002_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//45. 18 - 34 Years
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//46. 18-34 Lives Alone
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//47. 35 - 64 Years
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_015E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//48. 35-64 Lives Alone
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//49. 65+ Years
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_022E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//50. 65+ Lives Alone
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_023E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//51. Total Education
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//52. Less than High School
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//53. High School Graduate
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//54. College or ASsociate Degree
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//55. Bachelors Degree
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//56. Graduates
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//57. Median Household Income
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19013_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	 .awaitAll(function(error, Results) {
+		  if (error) throw error;
+	  
+	  	  lonely.push(Results[LiveAlone].slice(1));
+		  lonely.push(Results[LiveWithSpouse].slice(1));
+		  lonely.push(Results[LiveWithPartner].slice(1));
+		  lonely.push(Results[HavingChild].slice(1));
+		  lonely.push(Results[LiveOtherRelative].slice(1));
+		  lonely.push(Results[LiveNonRelative].slice(1)); 
+
+		  foreigners.push(Results[TotByNat].slice(1));
+	 	  foreigners.push(Results[ForeignBorn].slice(1));
+
+	 	  sexdist.push(Results[SexDisMale].slice(1));
+	 	  sexdist.push(Results[SexDistFemale].slice(1));
+
+		  AllStatesData[0] = Results[TotalPopulation].slice(1);
+		  tinyMapLabel[0] = "Total Population";
+		  AllStatesData[1] = getLonely(lonely);
+		  tinyMapLabel[1] = "Loneliness";
+		  AllStatesData[2] = getLittleLonely(Results[45].slice(1),Results[46].slice(1));
+		  tinyMapLabel[2] = "Loneliness 18-34";
+		  AllStatesData[3] = getLittleLonely(Results[47].slice(1),Results[48].slice(1));
+		  tinyMapLabel[3] = "Loneliness 35-64";
+		  AllStatesData[4] = getLittleLonely(Results[49].slice(1),Results[50].slice(1));
+		  tinyMapLabel[4] = "Loneliness 65+";
+		  AllStatesData[5] = getForeign(Results[0]);
+		  tinyMapLabel[5] = "Foreigners";
+		  AllStatesData[6] = getLittleLonely(Results[51].slice(1), Results[52].slice(1));
+		  tinyMapLabel[6] = "Less than High School";
+		  AllStatesData[7] = getLittleLonely(Results[51].slice(1), Results[53].slice(1));
+		  tinyMapLabel[7] = "High School Graduate";
+		  AllStatesData[8] = getLittleLonely(Results[51].slice(1), Results[54].slice(1));
+		  tinyMapLabel[8] = "College | Associate Degree";
+		  AllStatesData[9] = getLittleLonely(Results[51].slice(1), Results[55].slice(1));
+		  tinyMapLabel[9] = "Bachelors Degree";
+		  AllStatesData[10] = getLittleLonely(Results[51].slice(1), Results[56].slice(1));
+		  tinyMapLabel[10] = "Graduate Students";
+		  AllStatesData[11] = Results[42].slice(1);
+		  tinyMapLabel[11] = "Per Capita Income";
+		  AllStatesData[12] = Results[57].slice(1);
+		  tinyMapLabel[12] = "Median Household Income";
+
+		  for(var i=0; i<12 ; i++)
+		{
+			ExtractData(Results[0],AllStatesData[i]);
+			drawTinyMap(Results[0],2,i)
+		}
+
+		d3.select('#doIt').on('click',function(){
+
+			d3.select(".tinyMaps").selectAll("svg").remove();
+
+			var fileSelected = [];
+			var selectedArray = [];
+			for(var i = 0 ; i< 8 ; i++)
+			{
+				fileSelected[i] = document.getElementById("variableSelection"+(i+1).toString());
+				if(fileSelected[i].options[fileSelected[i].selectedIndex] == undefined) break;
+				selectedArray[i] = fileSelected[i].options[fileSelected[i].selectedIndex].value;
+			}
+			
+			for(var i=0; i<selectedArray.length ; i++)
+		{
+			ExtractData(Results[0],AllStatesData[selectedArray[i]]);
+			drawTinyMap(Results[0],2,selectedArray[i]);
+		}
+
+				console.log(selectedArray);
+			});		
+
+			})
+
+	function getLittleLonely(lonely2, lonely1)
+	{
+		//console.log("Get Lonely");
+		//console.log(lonely1);
+		var StatesData = [];
+		var total = [];
+		var DataValueArray = [];
+		var temp = lonely1.slice();
+
+			for(var i =0 ; i<lonely1.length ;i++)
+			{
+				var dataValue = ((lonely1[i][1]/lonely2[i][1])).toFixed(2);
+			    DataValueArray.push(parseFloat(dataValue)); 
+			}
+
+			//console.log(DataValueArray);
+
+			for(var i=0; i< lonely[0].length ; i++)
+			{
+				temp[i][1] = DataValueArray[i];
+			}
+
+	        return temp;
+		
+	}
+
+	function getForeign(json)
+	{
+		//console.log("Get Foreign");
+		//console.log(foreigners);
+		var StatesData = [];
+		var total = [];
+		var DataValueArray = [];
+		var temp = foreigners[0];
+
+			for(var i =0 ; i<foreigners[0].length ;i++)
+			{
+				var dataValue = ((foreigners[1][i][1]/foreigners[0][i][1])*100).toFixed(2);
+				DataValueArray.push(parseFloat(dataValue));
+			}
+
+			//var dataValue = ((d[0][1]/total[i])*100).toFixed(2);
+
+			for(var i=0; i<json.features.length ; i++)
+			{
+				temp[i][1] = DataValueArray[i];
+			}
+
+	        return temp;
+	}
+
+	function getLonely(lonely)
+	{
+		//console.log("Get Lonely");
+		//console.log(lonely);
+		var StatesData = [];
+		var total = [];
+		var DataValueArray = [];
+		var temp = [];
+
+		for( var i =0 ; i < lonely[0].length ; i++)
+		{
+			/*temp[i] = new Array();
+			temp[i].push(lonely[0][i].slice());*/
+			temp[i] = lonely[0][i].slice();
+		}
+
+			for(var i =0 ; i<lonely.length ;i++)
+			{
+				for(var j =0; j < lonely[0].length ; j++)
+				{
+					if(StatesData[j] == undefined) 
+					{
+						total[j] = 0;
+						StatesData[j] = new Array();
+					}
+					total[j] += parseFloat(lonely[i][j][1]);
+					StatesData[j].push(lonely[i][j][1]);
+				}
+			}
+
+			/*for (var i=0 ; i<StatesData ; i++)
+			{
+				 var dataValue = ((StatesData[i][0][1]/total[i])*100).toFixed(2);
+				 DataValueArray.push(parseFloat(dataValue)); 
+			}*/
+
+	        StatesData.forEach(function(d,i) {
+			    var dataValue = ((d[0]/total[i])*100).toFixed(2);
+			    DataValueArray.push(parseFloat(dataValue)); 
+			   // console.log(dataValue);
+			});
+   
+			for(var i=0; i< lonely[0].length ; i++)
+			{
+				temp[i][1] = DataValueArray[i];
+			}
+
+	        return temp;
+		
+	}
+	
+
+    function ExtractData(json, variable)
+    {
+    	MinVal = 0;
+    	MaxVal = 0;
+		
+		var DataValueArray=[];
+
+			for (var i = 0; i < variable.length; i++) {
+
+				// Grab State Name
+				var dataState = variable[i][0];
+
+				// Grab data value 
+				var dataValue = variable[i][1];
+				DataValueArray.push(parseFloat(dataValue)); 
+
+				// Find the corresponding state inside the GeoJSON
+				for (var j = 0; j < json.features.length; j++)  {
+					var jsonState = json.features[j].properties.name;
+
+					if (dataState == jsonState) {
+
+					// Copy the data value into the JSON
+					json.features[j].properties.dataValue = dataValue; 
+
+					// Stop looking through the JSON
+					break;
+					}
+				}
+			}
+		
+		
+		MinVal=d3.min(DataValueArray);
+		MaxVal=d3.max(DataValueArray);
+	}
+	
+	function drawTinyMap(json,colorVar, variableNumber)
+	{
+		console.log("drawTiny");
+		console.log(variableNumber);
+		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//Width and height of map
+		var width = 200;//1500;//960;
+		var height = 150;//800;//500;
+
+		// D3 Projection
+		var projection = d3.geo.albersUsa()
+						   .translate([width/2, height/2])    // translate to center of screen
+						   .scale([200]);          // scale things down so see entire US
+		        
+		// Define path generator
+		var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
+				  	 .projection(projection);  // tell path generator to use albersUsa projection
+
+		if(colorVar == 1 )		
+		{
+			// Define linear scale for output
+			var color = d3.scale.sqrt().range(myColors[colorVar]);
+			color.domain([MinVal,0.99999,1,MaxVal]); // setting the range of the input data
+		}else
+		{
+			// Define linear scale for output
+			var color = d3.scale.linear().range(myColors[colorVar]);
+			color.domain([MinVal, MaxVal]); // setting the range of the input data
+		}		
+
+		//Create SVG element and append map to the SVG
+		var svg = d3.select(".tinyMaps")
+					.append("svg")
+					.attr("width", width)
+					.attr("height", height);
+
+		svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "bold")  
+        .text(tinyMapLabel[variableNumber]);
+					
+		// Bind the data to the SVG and create one path per GeoJSON feature
+		svg.selectAll("path")
+			.data(json.features)
+			.enter()
+			.append("path")
+			.attr("d", path)
+			.style("stroke", "#fff")
+			.style("stroke-width", "1")
+			.style("fill", function(d) {
+
+			// Get data value
+			var value = d.properties.dataValue;
+
+				if (value) {
+				//If value exists…
+				return color(value);
+				} else {
+				//If value is undefined…
+				return "rgb(213,222,217)";
+				}
+			});
+		 
+
+		
+
+	}
+					
+		</script>
+	</body>
+
+
+	</html>
+
