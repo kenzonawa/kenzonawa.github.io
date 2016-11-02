@@ -285,15 +285,15 @@
 	var q2 = d3.queue()
 	.defer(d3.json, "us.json")
 	//Total Graduates
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Population
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Lonely People
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Median Age
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Transportation
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	.awaitAll(DisplayCounties);
 	
 	function DisplayCounties(error, CountyResults)
@@ -313,115 +313,115 @@
     //0. States
 	.defer(d3.json, "us-states.json")
 	//1. Total Population
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //2. Sex Distribution-Male
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01001_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01001_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //3. Sex Distribution-Female
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01001_026E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01001_026E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//4. Median Age-Total
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//5. Median Age-Male
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//6. Median Age- Female
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//7. Lives Alone
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//8.  Householder Living With Spouse or vice-versa
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//9. Householder Living With Unmarried Partner or vice-versa
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//10. Child of Householder
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//11. Other Relatives
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//12. Other Nonrelatives
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//13. Transport
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //14. driving car alone
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //15. Carpool
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //16. TransportPublic
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //17. TransportTaxiCab
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //18. TransportMotorCycle
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_017E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_017E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //19. TransportBicycle
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //20. TransportWalked
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_019E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_019E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //21. TransportOtherMeans
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_020E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_020E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //22. TransportWorkedAtHome
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_021E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_021E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//23. Median Household income
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19013_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B19013_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	 //24. carpool 2
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //25. carpool 3
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //26. carpool 4
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //27. carpool 5 and 6
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//28. carpool 7
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	 //29. to travel Total
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //30. to travel Less than 5 minutes 
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //31. to travel 5 to 9 Minutes
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //32. to travel 10 to 14 Minutes
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //33. to travel 15 to 19 Minutes
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //34. to travel 20 to 24 Minutes
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //35. to travel 25 to 29 Minutes
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //36. to travel 30 to 34 Minutes
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //37. to travel 35 to 39 Minutes
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //38. to travel 40 to 44 Minutes
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //39. to travel 45 to 59 Minutes
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_011E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_011E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//40. to travel 60 to 89 Minutes
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //41. to travel 90 or More Minutes
-    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_013E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_013E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//42. Per Capita Income
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B19301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//43. Total Population by Place of Nativity
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,C05002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,C05002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//44. Foreign Born
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,C05002_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,C05002_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//45. 18 - 34 Years
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//46. 18-34 Lives Alone
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//47. 35 - 64 Years
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_015E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_015E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//48. 35-64 Lives Alone
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//47. 65+ Years
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_022E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_022E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//48. 65+ Lives Alone
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_023E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_023E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//49 Total Graduates
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//50 Graduates Born in State of Residence
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//51 Graduates Born in Other States
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//52 Graduates Native, Born Outside of US
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_024E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_024E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//53 Graduates Foreign Born
-	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_030E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_030E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	
 	.awaitAll(function(error, Results) {
 		  if (error) throw error;
@@ -641,7 +641,7 @@
 	}
 	function drawMapCounty(json,colorVar)
 	{
-		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//https://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 		//Width and height of map
 		var width = MapWidth;//1500;//960;
 		var height = MapHeight;//800;//500;
@@ -817,7 +817,7 @@
 			    .attr("class", "tooltip")				
 			    .style("opacity", 0);
 
-			//http://bl.ocks.org/WilliamQLiu/bd12f73d0b79d70bfbae
+			//https://bl.ocks.org/WilliamQLiu/bd12f73d0b79d70bfbae
 			group.selectAll(".dot")
 				      .data(data)
 				      .enter().append("circle")
@@ -996,7 +996,7 @@
 	
 
 
-	//https://bl.ocks.org/mbostock/3887235
+	//httpss://bl.ocks.org/mbostock/3887235
 	function drawPieChart(Transportdiv, clickedState)
 	{
 		var whatData = [];
@@ -1306,7 +1306,7 @@
 		
 	function drawMap(json,colorVar)
 	{
-		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//https://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 		//Width and height of map
 		var width = MapWidth;//1500;//960;
 		var height = MapHeight;//800;//500;
@@ -1506,7 +1506,7 @@
 	{
 
         //console.log("Draw transport map");
-		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//https://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 		//Width and height of map
 		var width = MapWidth;//960;
 		var height = MapHeight;//500;
