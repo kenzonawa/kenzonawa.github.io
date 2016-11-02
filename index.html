@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Project 2</title>
+	<title>ACS Data Visualization</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<script src="https://d3js.org/d3.v4.js"></script><!-- added by divi -->
@@ -20,6 +20,18 @@
 	}
 	
 	/* Style for Custom Tooltip */
+	div.Populationtooltip {   
+	 	position: absolute;           
+		text-align: center;           
+		width: 100px;                  
+		height: 28px;                 
+		padding: 2px;             
+		font: 20px sans-serif;        
+		background: white;   
+		border: 0px;      
+		border-radius: 8px;           
+		pointer-events: none;         
+	}
 	div.tooltip {   
 	 	position: absolute;           
 		text-align: center;           
@@ -68,6 +80,7 @@
 			margin: 20 auto auto auto;
 			position: relative;
 			width: 350px;
+			
 		}
 		/*Transport PieChart ToolTipBox*/
 		
@@ -137,6 +150,11 @@
 			text-align: center;
 		}
 		
+		h2 {
+			font-size: 24px;
+			text-align: center;
+		}
+		
 		#xaxis .domain {
 			fill: none;
 			stroke: #000;
@@ -167,7 +185,7 @@
 <body>
 	<a href="documentation.html"> Documentation </a>
 	<a href="smallView.html"> Heat Map </a>
-	<h2 style= "color:#373737;" align="center">2015 USA Total Population and LifeStyle Education, Transportation, Distribution</h2>
+	<h2 style= "color:#373737;" align="center">2015 USA - People And LifeStyle</h2>
     <div id="choice">
     <text id="test" style="position: absolute; left: 50px; top: 80px"> Choose Your Option</text>
 	<select id="variableSelection" style="position: absolute; left: 150px; top: 80px">
@@ -175,13 +193,12 @@
 	  <option value="0">Population Distribution</option>
 	  <option value="1">Sex Distribution</option>
 	  <option value="2">Loneliness</option>
-	  <option value="3">Median Age</option>
-	  <option value="4">Transportation</option>
-	  <option value="5">Daily Commute Time To Work</option>
-	  <option value="6">Graduate Education</option>
+	  <option value="3">Transportation</option>
+	  <option value="4">Daily Commute Time To Work</option>
+	  <option value="5">Graduate Education</option>
 	</select>
-        <button id="StateButton" style="position: absolute; left: 750px; top: 100px">State</button>
-		<button id="CountyButton" style="position: absolute; left: 900px; top: 100px">County</button>
+        <button id="StateButton" style="position: absolute; left: 325px; top: 80px">State</button>
+		<button id="CountyButton" style="position: absolute; left: 370px; top: 80px">County</button>
 </form>
     <text id="scatterAnalyse" style="position: absolute; left: 700px; top: 80px">variable one</text>
 	<select id="scatterSelection1" style="position: absolute; left: 760px; top: 80px">
@@ -200,31 +217,25 @@
 	  <option value="8">Foreign Born</option>
 	</select>
 	<button id="scatter" style="position: absolute; left: 1150px; top: 80px"> View </button>
+	<button id="clearScatter" style="position: absolute; left: 1200px; top: 80px"> Clear </button>
 	
     </div>
 	<div id="map" style="position: relative; top: 100px" >
 	<svg id="main" class='graph' width="1000" height="600" >
 		<text id='label' style="position: absolute; left: 100px; top: 70px"></text>
 	</svg>
-	<div id="map" style="position: relative; top: 100px" >
-	<svg id="main" class='graph' width="700" height="365" >
-		<text id='label' style="position: absolute; left: 100px; top: 70px"></text>
-	</svg>
 
-	<svg id="second" class='graph' width="450" height="250">
-		<text id='label' style="position: absolute; left: 1550px; top: 200px"></text>
-	</svg>
 
-	<svg id="fourth" class='graph' width="550" height="550" style="margin-top: 00px;">
+	<svg id="fourth" class='graph' width="550" height="550" style="position:absolute; top: 50px; left: 1000px">
 		<text id='label' style="float:right"></text>
 	</svg>
 	</div>
 
-	<svg id="third" class='graph' width="450" height="500">
+<!--<svg id="third" class='graph' width="450" height="500">
 		<text id='label' style="position: relative;"></text>
-	</svg>
+	</svg>-->
 	
-	<div id="multi-wrapper"></div>
+	<div id="multi-wrapper" style="position: relative; top: 200px"></div>
 	
 	<script>
 	
@@ -267,8 +278,8 @@
 	var TimeToTravelData=[];
 	var TransMaxVal;
 	var TransMinVal;
-	var pieChartLocationX = 700;
-	var pieChartLocationY = 100;
+	var pieChartLocationX = 1300;
+	var pieChartLocationY = 300;
 
 	var AllCountyData = [];
 	var CountyData = d3.map();
@@ -276,10 +287,12 @@
 	var myColors = 	[["rgb(231,225,239)","rgb(166,189,219)","rgb(28,144,153)"],//Total Population
 					 ["rgb(247,104,161)","rgb(254,235,226)","rgb(241,238,246)","rgb(4,90,141)"], //Sex Distribution Male and Female
 					 ["rgb(229,245,249)","rgb(44,162,95)"], // Loneliness
-					 ["rgb(229,245,249)","rgb(153,216,201)","rgb(44,162,95)"], //Median Age	
-					 ["rgb(254,224,210)","rgb(252,146,114)","rgb(222,45,38)"], // Transport **Divi**
-					 ["rgb(154,224,210)","rgb(152,146,114)","rgb(122,45,38)"] //Time to travel	 **Divi** 
+					 ["rgb(254,232,200)","rgb(253,187,132)","rgb(227,74,51)"], //Transportation	
+					 ["rgb(254,224,210)","rgb(252,146,114)","rgb(222,45,38)"], // Daily Commute Time To Work 
+					 ["rgb(154,224,210)","rgb(152,146,114)","rgb(122,45,38)"], //Graduate Education
+					 ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,144)','rgb(255,255,191)','rgb(224,243,248)','rgb(171,217,233)','rgb(116,173,209)','rgb(69,117,180)','rgb(49,54,149)'] // default
 					];
+					
 					
 	var myPieChartColors = [ ["rgb(254,235,226)","rgb(241,238,246)"],//Pie Chart Color for Sex Distribution
 							 ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]// Pie Chart for Lonliness
@@ -287,15 +300,15 @@
 	var q2 = d3.queue()
 	.defer(d3.json, "us.json")
 	//Total Graduates
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Population
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Lonely People
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
-	//Total Median Age
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	//Total Graduates
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//Total Transportation
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=county:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	.awaitAll(DisplayCounties);
 	
 	function DisplayCounties(error, CountyResults)
@@ -306,7 +319,7 @@
 		 AllCountyData[1] = CountyResults[1];//Graduates
 		 AllCountyData[2] = CountyResults[2];//Population
 		 AllCountyData[3] = CountyResults[3];//Lonely People
-		 AllCountyData[4] = CountyResults[4];//Median Age
+		 AllCountyData[4] = CountyResults[4];//Graduates
 		 AllCountyData[5] = CountyResults[5];//Transportation
 		 
 	}	
@@ -315,121 +328,119 @@
     //0. States
 	.defer(d3.json, "us-states.json")
 	//1. Total Population
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01003_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //2. Sex Distribution-Male
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01001_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01001_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //3. Sex Distribution-Female
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01001_026E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01001_026E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//4. Median Age-Total
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//5. Median Age-Male
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//6. Median Age- Female
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B01002_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B01002_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//7. Lives Alone
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//8.  Householder Living With Spouse or vice-versa
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//9. Householder Living With Unmarried Partner or vice-versa
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//10. Child of Householder
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//11. Other Relatives
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//12. Other Nonrelatives
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//13. Transport
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //14. driving car alone
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //15. Carpool
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //16. TransportPublic
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //17. TransportTaxiCab
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //18. TransportMotorCycle
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_017E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_017E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //19. TransportBicycle
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //20. TransportWalked
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_019E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_019E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //21. TransportOtherMeans
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_020E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_020E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //22. TransportWorkedAtHome
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_021E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_021E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//23. Median Household income
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B19013_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19013_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	 //24. carpool 2
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //25. carpool 3
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //26. carpool 4
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //27. carpool 5 and 6
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//28. carpool 7
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08301_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08301_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	 //29. to travel Total
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //30. to travel Less than 5 minutes 
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_002E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //31. to travel 5 to 9 Minutes
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_003E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //32. to travel 10 to 14 Minutes
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_004E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //33. to travel 15 to 19 Minutes
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_005E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //34. to travel 20 to 24 Minutes
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //35. to travel 25 to 29 Minutes
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_007E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //36. to travel 30 to 34 Minutes
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //37. to travel 35 to 39 Minutes
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //38. to travel 40 to 44 Minutes
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_010E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //39. to travel 45 to 59 Minutes
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_011E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_011E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//40. to travel 60 to 89 Minutes
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
     //41. to travel 90 or More Minutes
-    .defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B08303_013E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+    .defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B08303_013E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//42. Per Capita Income
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B19301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B19301_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//43. Total Population by Place of Nativity
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,C05002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,C05002_001E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//44. Foreign Born
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,C05002_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,C05002_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//45. 18 - 34 Years
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_008E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//46. 18-34 Lives Alone
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_009E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//47. 35 - 64 Years
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_015E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_015E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//48. 35-64 Lives Alone
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_016E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//47. 65+ Years
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_022E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_022E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//48. 65+ Lives Alone
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B09021_023E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B09021_023E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//49 Total Graduates
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_006E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//50 Graduates Born in State of Residence
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_012E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//51 Graduates Born in Other States
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_018E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//52 Graduates Native, Born Outside of US
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_024E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_024E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	//53 Graduates Foreign Born
-	.defer(d3.json, "https://api.census.gov/data/2015/acs1?get=NAME,B06009_030E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
+	.defer(d3.json, "http://api.census.gov/data/2015/acs1?get=NAME,B06009_030E&for=state:*&key=73e1331e8e24e6a2bb488ad78eb65aac8b0a96be")
 	
 	.awaitAll(function(error, Results) {
 		  if (error) throw error;
 	  
-	  	console.log(Results[0]);
-
 	  	  lonely.push(Results[LiveAlone].slice(1));
 		  lonely.push(Results[LiveWithSpouse].slice(1));
 		  lonely.push(Results[LiveWithPartner].slice(1));
@@ -439,7 +450,7 @@
 
 		  foreigners.push(Results[TotByNat].slice(1));
 	 	  foreigners.push(Results[ForeignBorn].slice(1));
-	 	 // console.log(foreigners);
+	 	  console.log(foreigners);
 
 	 	  sexdist.push(Results[SexDisMale].slice(1));
 	 	  sexdist.push(Results[SexDistFemale].slice(1));
@@ -447,9 +458,9 @@
 		  AllStatesData[0] = Results[TotalPopulation].slice(1);//TotalPopulation
 		  AllStatesData[1] = Results[SexDisMale].slice(1);//Sex Distribution Male
 		  AllStatesData[2] = Results[SexDistFemale].slice(1);//Sex Distribution Female
-		  AllStatesData[3] = Results[MedianAgeTot];//Median Age Total
-		  AllStatesData[4] = Results[MedianAgeMale];//Median Age Male
-		  AllStatesData[5] = Results[MedianAgeFemale];//Median Age Female
+		  AllStatesData[3] = Results[MedianAgeTot].slice(1);//Median Age Total
+		  AllStatesData[4] = Results[MedianAgeMale].slice(1);//Median Age Male
+		  AllStatesData[5] = Results[MedianAgeFemale].slice(1);//Median Age Female
 		  AllStatesData[6] = Results[13].slice(1);
 
 		  AllStatesData[7] = getLonely(lonely);
@@ -494,11 +505,12 @@
 		 TimeToTravelData[11]=Results[40]; // 60 - 89 
 		 TimeToTravelData[12]=Results[41]; // 90 and above 
 
-		 ExtactTransportData(Results[0],TransportData);
-		 ExtractTimeToTravelData(Results[0],TimeToTravelData); 
+		 
+		
 		
 		 ExtractData(Results[0],Default); //default
-		 drawMap(Results[0],0); //default
+		 console.log(MaxVal);
+		 drawMap(Results[0],6); //default
 		 
 		//ExtractDataSexDistribution(Results[0],1);//test
 		//drawMap(Results[0],0);//test
@@ -513,43 +525,109 @@
 				.on('change', function() {
 					clearLegendHeadingBarcharts();
 					d3.select("#main").selectAll('g').remove();
-					d3.select("#main").selectAll('svg').remove();          //CHANGE
+					d3.select("#main").selectAll('svg').remove();
 					var e = document.getElementById("variableSelection").value;
 					switch(e){
 						case '0':  d3.select("#StateButton")
 									.on('click', function() {
 									clearLegendHeadingBarcharts();
 									d3.select("#main").selectAll('g').remove();	
-									d3.select("#main").selectAll('svg').remove();        // CHANGE
-									ExtractData(Results[0],1); 
-									drawMap(Results[0],0);
+									d3.select("#main").selectAll('svg').remove();									
+									ExtractData(Results[0],e); 
+									drawMap(Results[0],e);
 									});
 								  d3.select("#CountyButton")
 									.on('click', function() {
 									clearLegendHeadingBarcharts();
-									d3.select("#main").selectAll('g').remove();
-									d3.selectAll(".states").remove();								
+								 d3.select("#main").selectAll('g').remove();
+								 d3.select("#main").selectAll('svg').remove();									
 									 ExtactDataCounty(AllCountyData[0],1);
-									 console.log("All Countyd Data")
-									 console.log(AllCountyData[0])
-								     drawMapCounty(AllCountyData[0],0)
+								     drawMapCounty(AllCountyData[0],e)
 									});								  
 								 
 								  break;
-					    case '1': ExtractDataSexDistribution(Results[0],e);
-								  drawMap(Results[0],e);
+					    case '1': 
+									d3.select("#StateButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									d3.select("#main").selectAll('g').remove();	
+									d3.select("#main").selectAll('svg').remove();									
+									ExtractDataSexDistribution(Results[0],e);
+								    drawMap(Results[0],e);
+									});
+									
+									d3.select("#CountyButton")
+									.on('click', function() {
+
+									});
 					              break;
-					    case '2': getLonely(lonely);
-								  drawMap(Results[0],e);
+					    case '2': 
+								 d3.select("#StateButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									d3.select("#main").selectAll('g').remove();	
+									d3.select("#main").selectAll('svg').remove();									
+									getLonely(lonely);
+									ExtractData(Results[0],7); 
+									drawMap(Results[0],e);
+									});
+								  d3.select("#CountyButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									 d3.select("#main").selectAll('g').remove();
+									 d3.select("#main").selectAll('svg').remove();
+									 ExtactDataCounty(AllCountyData[0],3);
+								     drawMapCounty(AllCountyData[0],e)
+									});
+
 					              break;
-					    case '4':
-								drawTransportMap(Results[0],e);
+					    case '3':
+									 d3.select("#StateButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									d3.select("#main").selectAll('g').remove();	
+									d3.select("#main").selectAll('svg').remove();									
+									
+									ExtactTransportData(Results[0],TransportData);
+									drawTransportMap(Results[0],e);
+									});
+								   d3.select("#CountyButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									 d3.select("#main").selectAll('g').remove();
+									 d3.select("#main").selectAll('svg').remove();
+									 ExtactDataCounty(AllCountyData[0],5);
+								     drawMapCounty(AllCountyData[0],e)
+									});
+
+								  break;
+						case '4':
+								  d3.select("#main").selectAll('svg').remove();
+								  ExtractTimeToTravelData(Results[0],TimeToTravelData); 
+								 drawTimeToTravelMap(Results[0],e);
 								break;
 						case '5':
-								drawTimeToTravelMap(Results[0],e);
+								  d3.select("#StateButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									d3.select("#main").selectAll('g').remove();	
+									d3.select("#main").selectAll('svg').remove();									
+								
+									 ExtactGraduateEducation(Results[0],10);
+									 drawGraduateEducation(Results[0],e)
+									});
+								   d3.select("#CountyButton")
+									.on('click', function() {
+									clearLegendHeadingBarcharts();
+									 d3.select("#main").selectAll('g').remove();
+									 d3.select("#main").selectAll('svg').remove();
+									 ExtactDataCounty(AllCountyData[0],4);
+								     drawMapCounty(AllCountyData[0],e)
+									});
 								break;
-					    default: ExtractData(Results[0],e);
-								 drawMap(Results[0],e);
+					    default: clearLegendHeadingBarcharts();
+								d3.select("#main").selectAll('g').remove();
+								d3.select("#main").selectAll('svg').remove();
 					            break;
 					}		
 				});
@@ -562,8 +640,211 @@
 
 				d3.select("#fourth").selectAll('g').remove();
 				scatterThePlot(AllStatesData[selected1],AllStatesData[selected2]);
-			});			
+			});	
+
+			d3.select('#clearScatter').on('click',function(){
+				d3.select("#fourth").selectAll('g').remove();
+			});		
 	});
+	function ExtactGraduateEducation(json,variable)
+    {
+        MinVal = 0;
+    	MaxVal = 0;
+        
+		var DataValueArray = [];
+		var GradVar = parseInt(variable);
+		
+		 for (var i = 1; i < AllStatesData[variable].length; i++){
+            
+			var DataValueT = AllStatesData[variable][i][1];
+			var DataValueR = AllStatesData[GradVar+1][i][1];
+			var DataValueO = AllStatesData[GradVar+2][i][1];
+			var DataValueN = AllStatesData[GradVar+3][i][1];
+			var DataValueF = AllStatesData[GradVar+4][i][1];
+			var dataState = AllStatesData[variable][i][0];
+			
+			DataValueArray.push(parseFloat(DataValueT));
+						
+			for(var j=0;j<json.features.length;j++)
+			{
+				var jsonState = json.features[j].properties.name;
+				if (dataState == jsonState) {
+					
+					json.features[j].properties.TotalGraduateData = parseFloat(DataValueT);
+					json.features[j].properties.BornInStateOfR=parseFloat(DataValueR);
+					json.features[j].properties.BornOutOfState=parseFloat(DataValueO);
+					json.features[j].properties.BornOutNative=parseFloat(DataValueN);
+					json.features[j].properties.BornForeign=parseFloat(DataValueF);
+					
+					break;
+					
+				}				
+			}
+		}
+		
+        MinVal = d3.min(DataValueArray);
+
+    	MaxVal = d3.max(DataValueArray);
+
+	}
+	function drawGraduateEducation(json,colorVar)
+	{
+
+		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//Width and height of map
+		var width = MapWidth;//960;
+		var height = MapHeight;//500;
+		// D3 Projection
+
+		var projection = d3.geo.albersUsa()
+						   .translate([width/2, height/2])    // translate to center of screen
+						   .scale([MapScale]);          // scale things down so see entire US
+
+		// Define path generator
+
+		var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
+				  	 .projection(projection);  // tell path generator to use albersUsa projection
+		// Define linear scale for output
+
+		var color = d3.scale.linear()
+					  .range(myColors[colorVar]);
+
+		color.domain([MinVal, MaxVal]); // setting the range of the input data
+
+		//Create SVG element and append map to the SVG
+
+		var svg = d3.select("#main")
+					.append("svg")
+					.attr("id", "educationmap")
+					.attr("width", width + 400)
+					.attr("height", height);
+
+		// Append Div for tooltip to SVG
+
+		var EducationDiv = d3.select("body")
+					.append("div")   
+					.attr("class", "pie-tooltip")               
+					.style("opacity", 0);
+
+		// Bind the data to the SVG and create one path per GeoJSON feature
+
+		svg.selectAll("path")
+			.data(json.features)
+			.enter()
+			.append("path")
+			.attr("d", path)
+			.attr("class", "states")
+			.style("stroke", "#fff")
+			.style("stroke-width", "1")
+			.style("fill", function(d) {
+			// Get data value
+			var value = d.properties.TotalGraduateData;
+				if (value) {
+				//If value exists…
+					return color(value);
+				} else {
+				//If value is undefined…
+					return "rgb(213,222,217)";
+				}
+			})
+			.on('mouseover', function(d,i) {
+				drawHoverPieChartEdu(EducationDiv,d);
+            })			
+			.on('mouseout', function(d) {		
+							EducationDiv.transition()		
+								.duration(500)		
+								.style("opacity", 0);
+                            d3.selectAll(".pie-area").remove();
+							d3.selectAll("#pie-heading").remove();
+							d3.selectAll("#household").remove();
+
+			});
+
+	}
+	function drawHoverPieChartEdu(EducationDiv,d)
+	{
+		//starts here
+		var width = 250;
+		var height = 250;
+		var radius = Math.min(width, height) / 2;
+		var donutWidth = 25;
+		var legendRectSize = 10;
+		var legendSpacing = 10;
+		var PieChartData = [];
+		
+		PieChartData[0] = d.properties.BornInStateOfR;
+		PieChartData[1] = d.properties.BornOutOfState;
+		PieChartData[2] = d.properties.BornOutNative;
+		PieChartData[3] = d.properties.BornForeign;
+		
+		LegendData = ["Born In-State","Born Out-of-State","Native","Foreign"];
+		
+			
+		var color = d3.scaleOrdinal(d3.schemeCategory10);
+		var arc = d3.arc()
+					.innerRadius(radius - donutWidth)
+					.outerRadius(radius);
+		var pie = d3.pie()
+			.value(function(d) { return parseInt(d); })
+			.sort(null);
+			
+
+			var tots = d.properties.TotalGraduateData;
+
+			EducationDiv.append("h1")
+				.attr("id","pie-heading")
+				.style("font-size", "24px")
+				.html(d.properties.name);
+			EducationDiv.append("h2")
+				.attr("id","household")
+				.html("Total: " + tots);
+
+			EducationDiv.append('svg')
+				.attr("class", "pie-area")
+				.attr('width', width)
+				.attr('height', height)
+				.append('g')
+				.attr('transform', 'translate(' + (width/2 ) +
+						',' + (height/2) + ')')
+				.selectAll('path')
+				.data(pie(PieChartData))
+				.enter()
+				.append('path')
+				.attr('d', arc)
+				.attr('fill', function(d, i) {
+					return color(i);})
+
+			EducationDiv.transition()		
+				.duration(200)		
+				.style("opacity", .9)		
+				.style("left", (pieChartLocationX) + "px")		
+				.style("top", (pieChartLocationY) + "px");
+
+			var chart = d3.selectAll('.pie-area');
+			var legend = chart.selectAll('.legend')
+				.data(color.domain())
+				.enter()
+				.append('g')
+				.attr('class', 'legend')
+				.attr('transform', function(d, i) {
+				var height = legendRectSize + legendSpacing;
+				var offset =  height * color.domain().length / 2;
+				var horz = 8 * legendRectSize;
+				var vert = i * height + 50;
+				return 'translate(' + horz + ',' + vert + ')';
+				});
+
+			legend.append('rect')
+				.attr('width', legendRectSize)
+				.attr('height', legendRectSize)
+				.style('fill', color)
+				.style('stroke', color)                                   // UPDATED (removed semicolon)                                                      // NEW
+			legend.append('text')
+				.attr('x', legendRectSize + legendSpacing)
+				.attr('y', legendRectSize - legendSpacing + 5)
+				.text(function(d,i) { return LegendData[i]; });
+					
+	}
 	function ExtactData(json, variable)
     {
     	MinVal = 0;
@@ -643,7 +924,7 @@
 	}
 	function drawMapCounty(json,colorVar)
 	{
-		//https://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 		//Width and height of map
 		var width = MapWidth;//1500;//960;
 		var height = MapHeight;//800;//500;
@@ -654,7 +935,7 @@
 						   .scale([MapScale]);          // scale things down so see entire US
 		        
 		// Define path generator
-		var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
+		var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
 				  	 .projection(projection);  // tell path generator to use albersUsa projection
 
 		// Define linear scale for output
@@ -698,23 +979,34 @@
 				return "rgb(213,222,217)";
 				}
 			});
-		console.log("Shithole");
-		console.log(topojson.feature(json, json.objects.states, function(a, b) { return a !== b; }));
-
+		
 		svg.append("path")
 			.datum(topojson.feature(json, json.objects.states, function(a, b) { return a !== b; }))
 			.attr("class", "states")
 			.attr("d", path)
-			.style("stroke", "#fff")
 			.style("fill", "none")
+			.style("stroke", "#fff")
 			.style("stroke-linejoin", "round")
-			.style("stroke-width", "1");
-
+			.style("stroke-width", "1")			
+			.on('mouseover', function(d,i){
+							div.transition()		
+								.duration(200)		
+								.style("opacity", .9)		
+						     //div.html(d.properties.name)	
+							//div.html(d.properties.name+"</br>"+d.properties.dataValue)
+								.style("left", (d3.event.pageX) + "px")		
+								.style("top", (d3.event.pageY - 28) + "px");	
+						})
+			.on('mouseout', function(d) {		
+							div.transition()		
+								.duration(500)		
+								.style("opacity", 0)
+			});
 	}
 	function getLittleLonely(lonely1, lonely2)
 	{
-	//	console.log("Get Lonely");
-	//	console.log(lonely1);
+		console.log("Get Lonely");
+		console.log(lonely1);
 		var StatesData = [];
 		var total = [];
 		var DataValueArray = [];
@@ -819,7 +1111,7 @@
 			    .attr("class", "tooltip")				
 			    .style("opacity", 0);
 
-			//https://bl.ocks.org/WilliamQLiu/bd12f73d0b79d70bfbae
+			//http://bl.ocks.org/WilliamQLiu/bd12f73d0b79d70bfbae
 			group.selectAll(".dot")
 				      .data(data)
 				      .enter().append("circle")
@@ -998,7 +1290,7 @@
 	
 
 
-	//httpss://bl.ocks.org/mbostock/3887235
+	//https://bl.ocks.org/mbostock/3887235
 	function drawPieChart(Transportdiv, clickedState)
 	{
 		var whatData = [];
@@ -1046,69 +1338,64 @@
 
 		var tots = d3.sum(data);
 
+		Transportdiv.append("h2")
+			.attr("id","household")
+			.html(lonely[0][clickedState][0]);
 
+		var svg = Transportdiv.append('svg')
+			.attr("class", "pie-area")
+			.attr('width', width)
+			.attr('height', height)
+			.append('g')
+			.attr('transform', 'translate(' + (width/2 ) +
+					',' + (height/2) + ')')
+			
+			var g = svg.selectAll(".arc")
+			  .data(pie(data))
+			  .enter().append("g")
+			  .attr("class", "arc");
 
-					Transportdiv.append("h2")
-						.attr("id","household")
-						.html(lonely[0][clickedState][0]);
+			g.append('path')
+			.attr('d', arc)
+			.style("fill", function(d,i) { return color(i); })
 
-					var svg = Transportdiv.append('svg')
-						.attr("class", "pie-area")
-						.attr('width', width)
-						.attr('height', height)
-						.append('g')
-          				.attr('transform', 'translate(' + (width/2 ) +
-            					',' + (height/2) + ')')
-						
-						var g = svg.selectAll(".arc")
-					      .data(pie(data))
-					      .enter().append("g")
-					      .attr("class", "arc");
+			g.append("text")
+			  .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+			  .attr("dy", ".35em")
+			  .style("font-size", "9px")
+				.text(function(d){ return parseFloat((d.value/tots)*100).toFixed(1)+"%"; });	
 
-						g.append('path')
-						.attr('d', arc)
-						.style("fill", function(d,i) { return color(i); })
+			
 
-						g.append("text")
-					      .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-					      .attr("dy", ".35em")
-					      .style("font-size", "9px")
-							.text(function(d){ return parseFloat((d.value/tots)*100).toFixed(1)+"%"; });	
+		Transportdiv.transition()		
+			.duration(200)		
+			.style("opacity", .9)		
+			.style("left", (pieChartLocationX) + "px")		
+			.style("top", (pieChartLocationY) + "px");
 
-					    
+		var chart = d3.selectAll('.pie-area');
+		var legend = chart.selectAll('.legend')
+			.data(color.domain())
+			.enter()
+			.append('g')
+			.attr('class', 'legend')
+			.attr('transform', function(d, i) {
+			var height = legendRectSize + legendSpacing;
+			var offset =  height * color.domain().length / 2;
+			var horz = 8 * legendRectSize;
+			var vert = i * height + 200;
+			return 'translate(' + horz + ',' + vert + ')';
+			});
 
-					Transportdiv.transition()		
-						.duration(200)		
-						.style("opacity", .9)		
-						.style("left", (pieChartLocationX) + "px")		
-						.style("top", (pieChartLocationY) + "px");
-
-
-				
-
-					var chart = d3.selectAll('.pie-area');
-					var legend = chart.selectAll('.legend')
-						.data(color.domain())
-						.enter()
-						.append('g')
-						.attr('class', 'legend')
-						.attr('transform', function(d, i) {
-						var height = legendRectSize + legendSpacing;
-						var offset =  height * color.domain().length / 2;
-						var horz = 8 * legendRectSize;
-						var vert = i * height + 200;
-						return 'translate(' + horz + ',' + vert + ')';
-						});
-
-					legend.append('rect')
-						.attr('width', legendRectSize)
-						.attr('height', legendRectSize)
-						.style('fill', color)
-						.style('stroke', color)                                   // UPDATED (removed semicolon)                                                      // NEW
-					legend.append('text')
-						.attr('x', legendRectSize + legendSpacing)
-						.attr('y', legendRectSize - legendSpacing + 5)
-						.text(function(d,i) { return whatData[i]; });     
+		legend.append('rect')
+			.attr('width', legendRectSize)
+			.attr('height', legendRectSize)
+			.style('fill', color)
+			.style('stroke', color)                                   // UPDATED (removed semicolon)                                                      // NEW
+		legend.append('text')
+			.attr('x', legendRectSize + legendSpacing)
+			.attr('y', legendRectSize - legendSpacing + 5)
+			.text(function(d,i) { return whatData[i]; });     
 
 		
 	}
@@ -1125,14 +1412,45 @@
 			for (var j = 0; j < json.features.length; j++)  {
 
 				// Copy the data value into the JSON
-				json.features[j].properties.dataValue = 100; 
+				json.features[j].properties.dataValue = j*30; 
 			}
 				
 			MinVal=0;
-			MaxVal=255;
+			MaxVal=1500;
 		}
-		else
+		else if(variable==0)
 		{
+			{
+			for (var i = 0; i < AllStatesData[variable].length; i++) {
+
+				// Grab State Name
+				var dataState = AllStatesData[variable][i][0];
+
+				// Grab data value 
+				var dataValue = AllStatesData[variable][i][1];
+				var MedianAge = AllStatesData[3][i][1];
+				DataValueArray.push(parseFloat(dataValue)); 
+
+				// Find the corresponding state inside the GeoJSON
+				for (var j = 0; j < json.features.length; j++)  {
+					var jsonState = json.features[j].properties.name;
+
+					if (dataState == jsonState) {
+
+							// Copy the data value into the JSON
+							json.features[j].properties.dataValue = dataValue; 
+							json.features[j].properties.MedianAge = MedianAge; 
+
+							// Stop looking through the JSON
+							break;
+						}
+					}
+				}
+			}
+			 MinVal=d3.min(DataValueArray);
+		     MaxVal=d3.max(DataValueArray);
+		}
+		else{
 			for (var i = 0; i < AllStatesData[variable].length; i++) {
 
 				// Grab State Name
@@ -1156,10 +1474,12 @@
 					}
 				}
 			}
+			
+			MinVal=d3.min(DataValueArray);
+		   MaxVal=d3.max(DataValueArray);
 		}
 		
-		MinVal=d3.min(DataValueArray);
-		MaxVal=d3.max(DataValueArray);
+
 	}
 	
 	function ExtractDataSexDistribution(json, variable)
@@ -1206,7 +1526,11 @@
 		BarChartData.push(AllStatesData[2][State][1]);
 		BarChartData.push(AllStatesData[1][State][1]);
 		
-		//console.log(BarChartData);
+		var MedianAge =[];
+				
+		MedianAge.push(AllStatesData[5][State][1]);
+		MedianAge.push(AllStatesData[4][State][1]);	
+		console.log(AllStatesData[4]);
 
 		// find maximum values 
 		var MaxValue = d3.max(BarChartData);
@@ -1276,6 +1600,18 @@
 		        .style("font-size", "12px")
 	   	        .text();
 			;
+			console.log(MedianAge);
+			group.append("g").selectAll("text")
+               .data(MedianAge)
+               .enter()
+               .append("text")
+               .html(function(d){ return d;})
+               .attr("text-anchor", "middle")
+               .attr("x", function(d,i){return xScale.bandwidth() + i*200})
+               .attr("y",100)
+               .attr("font-family", "sans-serif")
+               .attr("font-size", "24px")
+               .attr("fill", "white");
 
 			Transportdiv.transition()		
 						.duration(200)		
@@ -1308,7 +1644,7 @@
 		
 	function drawMap(json,colorVar)
 	{
-		//https://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 		//Width and height of map
 		var width = MapWidth;//1500;//960;
 		var height = MapHeight;//800;//500;
@@ -1348,7 +1684,7 @@
 		// Append Div for tooltip to SVG
 		var div = d3.select("body")
 					.append("div")   
-					.attr("class", "tooltip")               
+					.attr("class", "Populationtooltip")               
 					.style("opacity", 0);
 					
 		// Bind the data to the SVG and create one path per GeoJSON feature
@@ -1377,22 +1713,33 @@
 					div.transition()		
 						.duration(200)		
 						.style("opacity", .9);		
-					//div.html(d.properties.name)	
+					if(colorVar==0)
+					{
+						div.html(d.properties.name+"</br>"+d.properties.dataValue+"</br>"+d.properties.MedianAge)
+						.style("left", (pieChartLocationX-200) + "px")		
+						.style("top", (pieChartLocationY) + "px");
+					}
+				    else{
 					div.html(d.properties.name+"</br>"+d.properties.dataValue)
-						.style("left", (d3.event.pageX) + "px")		
-						.style("top", (d3.event.pageY - 28) + "px");
-
-					//drawPieChart(Transportdiv, i);
+						.style("left", (pieChartLocationX-200) + "px")		
+						.style("top", (pieChartLocationY) + "px");
+					}
+					
 					if(colorVar==1)
 					{
 						drawBarChartSexDistribution(Transportdiv,i);
+					}
+					if(colorVar==2)
+					{
+						drawPieChart(Transportdiv, i);
 					}
 
 			})
 			.on('mouseout', function(d) {		
 							div.transition()		
 								.duration(500)		
-								.style("opacity", 0)
+								.style("opacity", 0);
+								
 							Transportdiv.transition()		
 								.duration(500)		
 								.style("opacity", 0);
@@ -1402,7 +1749,7 @@
 							d3.selectAll("#household").remove();
 			});			
 			
-			if(parseInt(colorVar)==2)
+			/*if(parseInt(colorVar)==2)
 			{
 				svg.on('click', function(d,i) {		
 					d3.select("#third").selectAll('g').remove();
@@ -1414,7 +1761,7 @@
 					d3.select("#third").selectAll('g').remove();
 					
 			});
-			}
+			}*/
 		 
 	}
 
@@ -1508,7 +1855,7 @@
 	{
 
         //console.log("Draw transport map");
-		//https://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+		//http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 		//Width and height of map
 		var width = MapWidth;//960;
 		var height = MapHeight;//500;
@@ -1551,6 +1898,7 @@
 			.enter()
 			.append("path")
 			.attr("d", path)
+			.attr("class", "states")
 			.style("stroke", "#fff")
 			.style("stroke-width", "1")
 			.style("fill", function(d) {
@@ -1880,6 +2228,7 @@
 					var tot = d.properties.TransportDataValue.Total;
 					Transportdiv.append("h1")
 						.attr("id","pie-heading")
+						.style("font-size", "24px")
 						.html(d.properties.name);
 					Transportdiv.append("h2")
 						.attr("id","household")
@@ -2088,11 +2437,11 @@
 					}
 				}
 			}}
-        /*console.log("New total update");
+        //console.log("New total update");
         TimeToTravelMinVal = d3.min(TimeToTravelDataArray);
-        console.log("Minvalue"+TimeToTravelMinVal);
+        //console.log("Minvalue"+TimeToTravelMinVal);
     	TimeToTravelMaxVal = d3.max(TimeToTravelDataArray);
-        console.log("Maxvalue"+TimeToTravelMaxVal);*/
+        //console.log("Maxvalue"+TimeToTravelMaxVal);
 	}
     //TimeToTravel Extract Ends here
 	function drawTimeToTravelMap(json,colorVar)
@@ -2135,6 +2484,7 @@
 			.enter()
 			.append("path")
 			.attr("d", path)
+			.attr("class", "states")
 			.style("stroke", "#fff")
 			.style("stroke-width", "1")
 			.style("fill", function(d) {
@@ -2172,6 +2522,7 @@
 
 					TimeToTraveldiv.append("h1")
 						.attr("id","pie-heading")
+						.style("font-size", "24px")
 						.html(d.properties.name);
 					TimeToTraveldiv.append("h2")
 						.attr("id","Commutetime")
