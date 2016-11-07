@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Data Visualization</title>
+	<title>Project 1</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js" charset="utf-8"></script>
-	<script src="jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link href="dashboard.css" rel="stylesheet">
+	<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 	<style>
@@ -18,12 +18,31 @@
 		}
 		#title{
 			text-align:center;
-			color: #eee;
 		}
-		p{
-			margin: 0px;
+    	text { 
+			font-family: Arial; 
+			font-size: 15px;
 		}
-	
+		h1{
+			font-family: Arial;
+		}
+		a{
+			border-radius: 3px;
+			font-family: Arial;
+		}
+		a:link, a:visited {
+		    background-color: #ecf0f1;
+		    color: #34495e;
+		    padding: 14px 25px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		}
+
+		a:hover, a:active {
+		    background-color: #bdc3c7;
+		    color: #2c3e50;
+		}
 		.axis path, .axis line {
 			fill: none;
 			stroke: black;
@@ -33,16 +52,62 @@
 			fill: black;
 			font-size: 11px;
 		}
-
-		.sidebar select{
-			width:100%;
-			margin-bottom:3px;
+		#fileDiv{
+			width:40%;
+			display: inline-block;
 		}
-
-		#scatterLabel{
-			text-align: center;
+		#selectionDiv{
+			margin-top: 30px;
+			height: 100px;
 		}
-		
+		#addCountry{
+			margin-right: 20px;
+			margin-left: 50px;
+		}
+		.container{
+			background-color: #ffffff;
+			float:right;
+		}
+		.top-menu{
+			padding: 0px;
+		}
+		.chart{
+			padding:30px;
+			border-radius: 4px;
+		}
+		button {
+		    background-color: #e74c3c;
+		    border: none;
+		    color: white;
+		    padding: 7px 20px;
+		    text-align: center;
+		    display: inline-block;
+		    font-size: 14px;
+		    margin: 4px 2px;
+		    transition-duration: 0.1s;
+		    border-radius: 4px;
+		    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.24), inset 0 2px 2px 0 rgba(255,255,255,0.19);
+		}
+		select#fileSelection, select#fileSelection2, select#fileSelection3, select#fileSelection4, select#fileSelection5, select.selection{
+		   -webkit-appearance: button;
+		   -webkit-border-radius: 2px;
+		   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+		   -webkit-padding-end: 20px;
+		   -webkit-padding-start: 2px;
+		   -webkit-user-select: none;
+		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+		   background-position: 97% center;
+		   background-repeat: no-repeat;
+		   border: 1px solid #AAA;
+		   color: #555;
+		   font-size: 12px;
+		   margin: 5px;
+		   overflow: hidden;
+		   padding: 5px;
+		   text-overflow: ellipsis;
+		   white-space: nowrap;
+		   width: 237px;
+		}
 		div.tooltip {	
 			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		    position: absolute;			
@@ -59,176 +124,124 @@
 			stroke: black;
 			stroke-width: 2px;
 		}
-		select:disabled{
-			color: #bbbbbb;
-		}
-		button:disabled{
-			opacity: 0.5;
-		}
-		.graphSet{
-			border-bottom: 1px solid #555;
-			padding-bottom: 10px;
-		}
-
-		.chart{
-			padding: 20px;
-			border-radius: 4px;
-		}
-
-		a:hover{
-			text-decoration: none;
-		}
-		.chart:hover{
-			background-color: #eee;
-			text-decoration: none;
-		}
-
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-      
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a href="#">Back to Portfolio</a></li>
-          </ul>
-          <h1 id="title">World Energy Data Visualization</h1>
-        </div>
-
-      </div>
-    </nav>
-	<div class= "container-fluid">
-		<div class="row">
-			<div class="col-md-2 sidebar">
-				<div class="graphSet">
-					<ul class="nav nav-sidebar">
-			            <a id = "barChart" href="#"><span class="chart">Bar Chart</span></a>
-			            <a href="#" id = "lineChart"><span class="chart">Line Chart</span></a>
-			        </ul>
-		        	<p style="margin-top:20px;">Graph 1:</p>
-		            <select id="fileSelection" >
-					  <option value="0">CO2 Emissions/Capita</option>
-					  <option value="1">Coal Consumption</option>
-					  <option value="2">Coal Production</option>
-					  <option value="3">Petroleum Consumption</option>
-					  <option value="4">Petroleum Production</option>
-					  <option value="5">Renewable Biofuel Consumption</option>
-					  <option value="6">Renewable Biofuel Production</option>
-					  <option value="7">Renewable Electricity Consumption</option>
-					  <option value="8">Renewable Electricity Generation</option>
-					  <option value="9">Total Electricity Consumption</option>
-					  <option value="10">Total Electricity Generation</option>
-					  <option value="11">Total Primary Energy Consumption</option>
-					  <option value="12">Total Primary Energy Production</option>
-					</select>
-					<p>Graph 2:</p>
-					<select id="fileSelection2">
-					  <option value="0">CO2 Emissions/Capita</option>
-					  <option value="1">Coal Consumption</option>
-					  <option value="2">Coal Production</option>
-					  <option value="3">Petroleum Consumption</option>
-					  <option value="4">Petroleum Production</option>
-					  <option value="5">Renewable Biofuel Consumption</option>
-					  <option value="6">Renewable Biofuel Production</option>
-					  <option value="7">Renewable Electricity Consumption</option>
-					  <option value="8">Renewable Electricity Generation</option>
-					  <option value="9">Total Electricity Consumption</option>
-					  <option value="10">Total Electricity Generation</option>
-					  <option value="11">Total Primary Energy Consumption</option>
-					  <option value="12">Total Primary Energy Production</option>
-					</select>
-				</div>
-				<div class="graphSet">
-					<ul class="nav nav-sidebar">
-		            	<li><a href="#" id = "scatterPlot">Scatter Plot</a></li>
-		          	</ul>
-					<p>X Axis:</p>
-					<select id="fileSelection3" disabled = "true">
-					  <option value="0">CO2 Emissions/Capita</option>
-					  <option value="1">Coal Consumption</option>
-					  <option value="2">Coal Production</option>
-					  <option value="3">Petroleum Consumption</option>
-					  <option value="4">Petroleum Production</option>
-					  <option value="5">Renewable Biofuel Consumption</option>
-					  <option value="6">Renewable Biofuel Production</option>
-					  <option value="7">Renewable Electricity Consumption</option>
-					  <option value="8">Renewable Electricity Generation</option>
-					  <option value="9">Total Electricity Consumption</option>
-					  <option value="10">Total Electricity Generation</option>
-					  <option value="11">Total Primary Energy Consumption</option>
-					  <option value="12">Total Primary Energy Production</option>
-					</select>
-					<p>Y Axis:</p>
-					<select id="fileSelection4" disabled = "true">
-					  <option value="0">CO2 Emissions/Capita</option>
-					  <option value="1">Coal Consumption</option>
-					  <option value="2">Coal Production</option>
-					  <option value="3">Petroleum Consumption</option>
-					  <option value="4">Petroleum Production</option>
-					  <option value="5">Renewable Biofuel Consumption</option>
-					  <option value="6">Renewable Biofuel Production</option>
-					  <option value="7">Renewable Electricity Consumption</option>
-					  <option value="8">Renewable Electricity Generation</option>
-					  <option value="9">Total Electricity Consumption</option>
-					  <option value="10">Total Electricity Generation</option>
-					  <option value="11">Total Primary Energy Consumption</option>
-					  <option value="12">Total Primary Energy Production</option>
-					</select>
-					<p>Radius:</p>
-					<select id="fileSelection5" disabled = "true">
-					  <option value="0">CO2 Emissions/Capita</option>
-					  <option value="1">Coal Consumption</option>
-					  <option value="2">Coal Production</option>
-					  <option value="3">Petroleum Consumption</option>
-					  <option value="4">Petroleum Production</option>
-					  <option value="5">Renewable Biofuel Consumption</option>
-					  <option value="6">Renewable Biofuel Production</option>
-					  <option value="7">Renewable Electricity Consumption</option>
-					  <option value="8">Renewable Electricity Generation</option>
-					  <option value="9">Total Electricity Consumption</option>
-					  <option value="10">Total Electricity Generation</option>
-					  <option value="11">Total Primary Energy Consumption</option>
-					  <option value="12">Total Primary Energy Production</option>
-					  <option selected value="20">Fixed Radius</option>
-					</select>
-					<button id="scatter" disabled="true"> Scatter! </button>
-				</div>
-			</br>
-				<a href="documentation.html"> Documentation </a>
-			</div>
-
-			<div class="col-md-9 main">
-				<h1 id="page-header" class="page-header">Choose Countries </h1>
-				<div class="row" style="margin-left: 10px;">
-					<div id="selectionDiv">
-						<button id="addCountry" style="margin-bottom:20px;"> Add Country </button></br>
-						<select class="selection">
-						</select>
-					</div>
-					<input type="range" id="myRange" min="0" max="32" value="0" style="visibility:hidden;">
-
-						<h1 id='scatterLabel' style="visibility:hidden;">1980</h1>
-
-					<svg id="main" class='graph' width="1000" height="250">
-						<text id='label' x='100' y='70' style="margin-bottom:5px;"></text>
-					</svg>
-
-					<svg id="second" class='graph' width="1000" height="250">
-						<text id='label2' x='100' y='70' style="margin-bottom:5px;"></text>
-					</svg>
-				</div>
-			</div>
-		</div>
+	<h1 id="title"> World Energy Visualization</h1>
+	<a href="documentation.html"> Documentation </a>
+	<div class="container">
+	<div class = "top-menu"> 
+		<span class="chart"><a href="#" id = "barChart">Bar Chart</a></span>
+		<span class="chart"><a href="#" id = "lineChart">Line Chart</a></span>
+		<span class="chart"><a href="#" id = "scatterPlot">Scatter Plot</a></span>
 	</div>
+	<div id="fileDiv">
+	<select id="fileSelection" style="position: relative; left: 0px;">
+	  <option value="0">CO2 Emissions/Capita</option>
+	  <option value="1">Coal Consumption</option>
+	  <option value="2">Coal Production</option>
+	  <option value="3">Petroleum Consumption</option>
+	  <option value="4">Petroleum Production</option>
+	  <option value="5">Renewable Biofuel Consumption</option>
+	  <option value="6">Renewable Biofuel Production</option>
+	  <option value="7">Renewable Electricity Consumption</option>
+	  <option value="8">Renewable Electricity Generation</option>
+	  <option value="9">Total Electricity Consumption</option>
+	  <option value="10">Total Electricity Generation</option>
+	  <option value="11">Total Primary Energy Consumption</option>
+	  <option value="12">Total Primary Energy Production</option>
+	</select>
+
+	<select id="fileSelection2" style="position: relative; left: 0px;">
+	  <option value="0">CO2 Emissions/Capita</option>
+	  <option value="1">Coal Consumption</option>
+	  <option value="2">Coal Production</option>
+	  <option value="3">Petroleum Consumption</option>
+	  <option value="4">Petroleum Production</option>
+	  <option value="5">Renewable Biofuel Consumption</option>
+	  <option value="6">Renewable Biofuel Production</option>
+	  <option value="7">Renewable Electricity Consumption</option>
+	  <option value="8">Renewable Electricity Generation</option>
+	  <option value="9">Total Electricity Consumption</option>
+	  <option value="10">Total Electricity Generation</option>
+	  <option value="11">Total Primary Energy Consumption</option>
+	  <option value="12">Total Primary Energy Production</option>
+	</select>
+
+	<select id="fileSelection3" style="position: relative; left: 0px; visibility:hidden;">
+	  <option value="0">CO2 Emissions/Capita</option>
+	  <option value="1">Coal Consumption</option>
+	  <option value="2">Coal Production</option>
+	  <option value="3">Petroleum Consumption</option>
+	  <option value="4">Petroleum Production</option>
+	  <option value="5">Renewable Biofuel Consumption</option>
+	  <option value="6">Renewable Biofuel Production</option>
+	  <option value="7">Renewable Electricity Consumption</option>
+	  <option value="8">Renewable Electricity Generation</option>
+	  <option value="9">Total Electricity Consumption</option>
+	  <option value="10">Total Electricity Generation</option>
+	  <option value="11">Total Primary Energy Consumption</option>
+	  <option value="12">Total Primary Energy Production</option>
+	</select>
+
+	<select id="fileSelection4" style="position: relative; left: 0px; visibility:hidden;">
+	  <option value="0">CO2 Emissions/Capita</option>
+	  <option value="1">Coal Consumption</option>
+	  <option value="2">Coal Production</option>
+	  <option value="3">Petroleum Consumption</option>
+	  <option value="4">Petroleum Production</option>
+	  <option value="5">Renewable Biofuel Consumption</option>
+	  <option value="6">Renewable Biofuel Production</option>
+	  <option value="7">Renewable Electricity Consumption</option>
+	  <option value="8">Renewable Electricity Generation</option>
+	  <option value="9">Total Electricity Consumption</option>
+	  <option value="10">Total Electricity Generation</option>
+	  <option value="11">Total Primary Energy Consumption</option>
+	  <option value="12">Total Primary Energy Production</option>
+	</select>
+
+	<select id="fileSelection5" style="position: relative; left: 0px; visibility:hidden;">
+	  <option value="0">CO2 Emissions/Capita</option>
+	  <option value="1">Coal Consumption</option>
+	  <option value="2">Coal Production</option>
+	  <option value="3">Petroleum Consumption</option>
+	  <option value="4">Petroleum Production</option>
+	  <option value="5">Renewable Biofuel Consumption</option>
+	  <option value="6">Renewable Biofuel Production</option>
+	  <option value="7">Renewable Electricity Consumption</option>
+	  <option value="8">Renewable Electricity Generation</option>
+	  <option value="9">Total Electricity Consumption</option>
+	  <option value="10">Total Electricity Generation</option>
+	  <option value="11">Total Primary Energy Consumption</option>
+	  <option value="12">Total Primary Energy Production</option>
+	  <option selected value="20">Fixed Radius</option>
+	</select>
+	<button id="scatter" style="position: relative; top: 0px; left: 20px; visibility:hidden;"> Scatter! </button>
+	</div>
+
+	
+
+	<div id="selectionDiv">
+
+	<button id="addCountry" style="background-color: #7f8c8d;"> Add Country </button>
+
+	<select class="selection">
+	</select>
+
+	</div>
+
+	<input type="range" id="myRange" min="0" max="32" value="0" style="visibility:hidden; margin-left: 100px;">
+	<text id='scatterLabel' x='100' y='70' style="visibility:hidden;">1980</text>
+	</div>
+
+	<svg id="main" class='graph' width="1200" height="250">
+		<text id='label' x='100' y='70' style="margin-bottom:5px;"></text>
+	</svg>
+
+	<svg id="second" class='graph' width="1200" height="250">
+		<text id='label2' x='100' y='70' style="margin-bottom:5px;"></text>
+	</svg>
+	
 	<script>
 
 		var listOfLocalities = [];
@@ -248,7 +261,7 @@
 		var fileMeasure = [];
 
 		d3.selectAll("#barChart")
-			.on("click", function(d){
+			.on("click", function(){
 				whichChart = 0;
 				switchVisibility(0);
 				d3.select("#main").selectAll('g').remove();
@@ -276,7 +289,6 @@
 				drawScatter(0);*/
 				d3.select('#myRange').on('change',function(){
 					var x = document.getElementById("myRange").value;
-					console.log(x);
 						drawScatter(x);
 				});
 			});
@@ -357,7 +369,7 @@
 			
 			//var maxProduction = d3.max(d3.max(chemical));
 
-			var chartWidth = 800;
+			var chartWidth = 1000;
 			var chartHeight = 120;
 			var barWidth = chartWidth / (2012-1980+2);
 			var z = d3.scale.category10();
@@ -415,7 +427,7 @@
 			      .style("font", "10px sans-serif")
 			      .text(function(d,i) { return localityName[i]; });
 				 
-			      /*
+
 			    //http://stackoverflow.com/questions/31840930/d3-scatter-plot-with-nested-array
 			    var scatterPlotGroups = city.selectAll(".scatterPlotGroup")
 				    .data(chemical)
@@ -440,7 +452,7 @@
 			            div.transition()		
 			                .duration(500)		
 			                .style("opacity", 0);	
-			        })*/
+			        })
     			
 			}
 			else {
@@ -538,8 +550,8 @@
 		{
 			//console.log(selectedYear);
 			//console.log(dataset[0]);
-			//console.log(dataset);
-			var chartWidth = 800;
+			console.log(dataset);
+			var chartWidth = 1000;
 			var chartHeight = 120;
 			var z = d3.scale.category10();
 
@@ -568,7 +580,7 @@
 				      .enter().append("circle")
 				      .attr("class", "dot")
 				      .attr("r", function(d){
-				      	//console.log(d);
+				      	console.log(d);
 				      	return parseInt(rScale(d[2]));
 				      })
 				      .attr("cx", function(d,i){
@@ -771,37 +783,35 @@
 		function switchVisibility(switchCase){
 			if(switchCase == 0)
 			{
-				document.getElementById("fileSelection").disabled = false;
-				document.getElementById("fileSelection2").disabled = false;
+				document.getElementById("fileSelection").style.visibility = "visible";
+				document.getElementById("fileSelection2").style.visibility = "visible";
 				document.getElementById("addCountry").style.visibility = "visible";
 				if(d3.select("#main").selectAll('g')[0].length != 0) document.getElementById("label").style.visibility = "visible";
 				if(d3.select("#second").selectAll('g')[0].length != 0) document.getElementById("label2").style.visibility = "visible";
 				d3.selectAll('.selection')
 					.style("visibility", "visible");
-				document.getElementById("fileSelection3").disabled = true;
-				document.getElementById("fileSelection4").disabled = true;
-				document.getElementById("fileSelection5").disabled = true;
-				document.getElementById("scatter").disabled = true;
+				document.getElementById("fileSelection3").style.visibility = "hidden";
+				document.getElementById("fileSelection4").style.visibility = "hidden";
+				document.getElementById("fileSelection5").style.visibility = "hidden";
+				document.getElementById("scatter").style.visibility = "hidden";
 				document.getElementById("myRange").style.visibility = "hidden";
 				document.getElementById("scatterLabel").style.visibility = "hidden";
-				document.getElementById("page-header").innerHTML = "Choose Countries"
 			}
 			else 
 			{
-				document.getElementById("fileSelection").disabled = true;
-				document.getElementById("fileSelection2").disabled = true;
+				document.getElementById("fileSelection").style.visibility = "hidden";
+				document.getElementById("fileSelection2").style.visibility = "hidden";
 				document.getElementById("addCountry").style.visibility = "hidden";
 				document.getElementById("label").style.visibility = "hidden";
 				document.getElementById("label2").style.visibility = "hidden";
 				d3.selectAll('.selection')
 					.style("visibility", "hidden");
-				document.getElementById("fileSelection3").disabled = false;
-				document.getElementById("fileSelection4").disabled = false;
-				document.getElementById("fileSelection5").disabled = false;
-				document.getElementById("scatter").disabled = false;
+				document.getElementById("fileSelection3").style.visibility = "visible";
+				document.getElementById("fileSelection4").style.visibility = "visible";
+				document.getElementById("fileSelection5").style.visibility = "visible";	
+				document.getElementById("scatter").style.visibility = "visible";
 				document.getElementById("myRange").style.visibility = "visible";
-				document.getElementById("scatterLabel").style.visibility = "visible";
-				document.getElementById("page-header").innerHTML = "Choose Year"
+				document.getElementById("scatterLabel").style.visibility = "visible";	
 			}
 
 		}
