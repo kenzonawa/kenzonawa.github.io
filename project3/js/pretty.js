@@ -208,6 +208,11 @@
           })
         }
 
+//        ************************************************************************************************************        
+//        ***                                                                                                      *** 
+//        ***                                            SET THE TIME                                              ***        
+//        ***                                                                                                      ***
+//        ************************************************************************************************************
 
         d3.select("#change")
         	.on("click", function(){
@@ -223,9 +228,9 @@
               crazy
               .transition()
               .delay(function(d, i) {
-                return (i*50);
+                return -((i-(data[2].length))*100);
               })
-              .duration(2000)
+              .duration(3000)
               .attr("x", function(d,i) {
                 return scalesArray[Math.floor(zScale2(parseInt(d.price_amount)))].scaleIt(d.price_amount);
               })
@@ -238,9 +243,9 @@
               crazy
               .transition()
               .delay(function(d, i) {
-                return (i*50);
+                return (i*100);
               })
-              .duration(2000)
+              .duration(7000)
               .attr("x", function(d,i) {
                 return goBack[i][0];
               })
