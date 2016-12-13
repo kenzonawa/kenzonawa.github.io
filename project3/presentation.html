@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Project 3</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/web-2.0.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+
+  <script src="js/d3.v3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/d3-queue.v3.min.js"></script>
+    <link type="text/css" href="css/d3.parcoords.css" rel="stylesheet">
+  <script src="js/d3.parcoords.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h2 style="text-align: center; margin-top: 15%">Data Visualization
+        Project 3</h2>
+        <h3 style="text-align: center;"> Victor Kenzo Nawa </h3>
+    </section>
+
+    <section class="slide" id="quick-start">
+      <h2 style="text-align: center">Dataset</h2>
+      <div class="slide">
+        <h3>Startup Ecosystem</h3>
+        <p></p>
+      </div>
+      <div class="slide">
+        <div><img src="img/crunchbase.jpg" style="height: 50px; float: left" alt="Dataset">
+              <img src="img/2013.png" style="height: 300px; " alt="Database">
+        </div>
+      </div>
+    </br>
+    </br>
+    </br>
+
+      <div class="slide">
+        <div style="margin: 0 auto;"><img src="img/variables.png" style="max-height: 800px; " alt="variables"></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h1>The Visualization</h1>
+    </section>
+
+    <section class="slide">
+      <h2 style="text-align: center">Scatter Plot</h2>
+      <svg id="scatter" style="width: 1000px; height: 1000px">
+              </svg>
+      <div class="slide">
+        <p>Gee, Kenzo... A scatter plot again?</p>
+      </div>
+    </section>
+
+
+    <section class="slide">
+      <h2 style="text-align: center">Parallel Coordinates</h2>
+      <div id="main" class="parcoords" style=" margin: 0 auto;width: 1000px; height: 500px;background-color : transparent;">
+              </div>
+    </section>
+
+    
+
+    <section class="slide" >
+      <h2 style="text-align: center">Rectangles</h2>
+      <button id="change">Change</button>
+          <svg id="pretty" style="width: 1000px; height: 500px">
+              </svg>
+    </section>
+
+    <section class="slide" >
+      <h2 style="text-align: center">Thanks!</h2>
+      <h1>I would love to hear your feedback!</h1>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+
+<script type="text/javascript" src="test.js"></script>
+<script type="text/javascript" src="js/scatterplot.js"></script>
+<script type="text/javascript" src="js/pretty.js"></script>
+
+</body>
+</html>

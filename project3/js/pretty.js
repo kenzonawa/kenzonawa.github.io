@@ -9,6 +9,12 @@
   var goBack = [];
   var status = "set";
 
+  // Append Div for tooltip to SVG
+  var div = d3.select("body")
+    .append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
+
 
   var colorScale = d3.scale.ordinal()
       .domain([0,1,2,3,4])
@@ -73,7 +79,7 @@
               .range([0,1,2,3,4,4])
 
 		var svg = d3.select("#pretty").append("g")
-		.attr("transform", "translate(100, 100)")
+		.attr("transform", "translate(100, 50)")
 	      .attr({
 	        "width": "1200",
 	        "height": "1000"
@@ -245,7 +251,7 @@
               .delay(function(d, i) {
                 return (i*100);
               })
-              .duration(7000)
+              .duration(1500)
               .attr("x", function(d,i) {
                 return goBack[i][0];
               })

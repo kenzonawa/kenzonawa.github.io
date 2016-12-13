@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CrunchBase Data Visualization</title>
+
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="build/css/custom.min.css" rel="stylesheet">
+
+    <!-- D3 -->
+    <script src="js/d3.v3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/d3-queue.v3.min.js"></script>
+  <link type="text/css" href="css/d3.parcoords.css" rel="stylesheet">
+  <script src="js/d3.parcoords.js"></script>
+
+ <style>
+
+svg {
+  font: 10px sans-serif;
+}
+
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: steelblue;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.brush {
+  fill-opacity: 0;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  cursor: move;
+}
+  
+div.tooltip {   
+    color: black;
+    position: absolute;           
+    text-align: center;                          
+    padding: 2px;             
+    font: 12px sans-serif;        
+    background: white;   
+    border: 0px;      
+    border-radius: 8px;           
+    pointer-events: none;         
+  }
+
+</style>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-laptop"></i> <span>Kenzo Nawa</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." style="" class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <h2 style="padding-bottom: 5px; margin-top: -8px;">Data</h2>
+                <h2>Visualization</h2>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Dashboard</h3>
+                <ul class="nav side-menu">
+                  <li><a href="index.html"><i class="fa fa-align-left"></i>RecTransition</a>
+                  </li>
+                  <li><a href="parallel.html"><i class="fa fa-area-chart"></i>Parallel Coordinates</a>
+                  </li>
+                  <li><a href="scatter.html"><i class="fa fa-circle-o"></i> Scatter Plot </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Docs</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-file-text"></i> Documentation </a>
+
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Documentation</h3>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Problem Statement</h2>
+                    <ul class="nav navbar-right panel_toolbox" style="min-width: 0">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>The startup ecosystem is very dynamic. Everyday, new companies get founded, others companies get sold, and some even get shutdown for good. It is a fast-paced world where entrepreneurs are always trying to build and develop the next big idea. With that in mind, could there be a trend as to what successful companies go through, and what failing companies do? Would it be possible to gain insight if we could visualize data we have on startups?
+                    </p>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Dataset</h2>
+                    <ul class="nav navbar-right panel_toolbox" style="min-width: 0">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>The dataset being used will be a snapshot of CrunchBase’s 2013 database. CrunchBase is the biggest startup ecosystem database, consisting of investors, incubators and start-ups, which comprises around 500,000 data points profiling companies, people, funds, and fundings. The 2013 database snapshot is freely available online through the following link: https://data.crunchbase.com/docs/2013-snapshot. A Basic Access registration is required.
+                    </br> </br>
+                    More specifically, this visualization looks at companies in the tech industry that went through funding and ultimately got sold.
+                    </p>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Analysis Task</h2>
+                    <ul class="nav navbar-right panel_toolbox" style="min-width: 0">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>
+                      This visualization aids users to see trends in companies that got funding and how that relates to their acquisition price. Users can get more detailed information with the Parallel Coordinates graph, or simply have a general overview of the companies with RecTransition.
+
+                    </p>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Design Decisions</h2>
+                    <ul class="nav navbar-right panel_toolbox" style="min-width: 0">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>First and foremost, I wanted users to be able to compare different companies and see the relation between funding and acquisition price. For that, I chose Parallel Coordinates because not only would users be able to compare companies, I would also be able to add each companies specific funding (if they went through Series A,B,C, Seed Investment, or VC). 
+                    </br></br>
+                    Once that was done, I noticed it was possible to have somewhat an overview, but information wasn’t really clear. That’s when I decided that I needed some other type of graph that would make it easier for users to see trends in the data. I went to the sketch board and started ideating.
+                  </br></br>
+                    (images)
+
+                    I found that RecTransition was a clear and somewhat fun way to see the trends between the companies. You can easily just follow one company as it transitions from its funding value to its acquisition price, or you can follow a specific color to see how companies within that funding range made it.
+
+                    </p>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Insights</h2>
+                    <ul class="nav navbar-right panel_toolbox" style="min-width: 0">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>First and foremost, I wanted users to be able to compare different companies and see the relation between funding and acquisition price. For that, I chose Parallel Coordinates because not only would users be able to compare companies, I would also be able to add each companies specific funding (if they went through Series A,B,C, Seed Investment, or VC). 
+                    </br></br>
+                    Once that was done, I noticed it was possible to have somewhat an overview, but information wasn’t really clear. That’s when I decided that I needed some other type of graph that would make it easier for users to see trends in the data. I went to the sketch board and started ideating.
+                  </br></br>
+                    (images)
+
+                    I found that RecTransition was a clear and somewhat fun way to see the trends between the companies. You can easily just follow one company as it transitions from its funding value to its acquisition price, or you can follow a specific color to see how companies within that funding range made it.
+
+                    </p>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Interactive Visual Analytics H590
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    
+    <!-- Custom Theme Scripts -->
+    <script src="build/js/custom.min.js"></script>
+    <script type="text/javascript" src="js/parallel.js"></script>
+  </body>
+</html>

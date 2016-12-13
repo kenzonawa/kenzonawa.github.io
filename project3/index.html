@@ -1,147 +1,205 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=1024, user-scalable=no">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Project 3</title>
+    <title>CrunchBase Data Visualization</title>
 
-  <!-- Required stylesheet -->
-  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
-  <!-- Extension CSS files go here. Remove or add as needed. -->
-  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
-  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
-  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
-  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
-  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
 
-  <!-- Style theme. More available in /themes/style/ or create your own. -->
-  <link rel="stylesheet" media="screen" href="themes/style/web-2.0.css">
-
-  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
-  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
-
-  <!-- Basic black and white print styles -->
-  <link rel="stylesheet" media="print" href="core/print.css">
-
-  <!-- Required Modernizr file -->
-  <script src="modernizr.custom.js"></script>
-
-  <script src="js/d3.v3.min.js" charset="utf-8"></script>
+    <!-- D3 -->
+    <script src="js/d3.v3.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="js/d3-queue.v3.min.js"></script>
-    <link type="text/css" href="css/d3.parcoords.css" rel="stylesheet">
-  <script src="js/d3.parcoords.js"></script>
-  <link rel="stylesheet" href="css/style.css">
 
-</head>
-<body>
-  <div class="deck-container">
+ <style>
 
-    <!-- Begin slides. Just make elements with a class of slide. -->
+svg {
+  font: 10px sans-serif;
+}
 
-    <section class="slide">
-      <h2 style="text-align: center; margin-top: 15%">Data Visualization
-        Project 3</h2>
-        <h3 style="text-align: center;"> Victor Kenzo Nawa </h3>
-    </section>
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
 
-    <section class="slide" id="quick-start">
-      <h2 style="text-align: center">Dataset</h2>
-      <div class="slide">
-        <h3>Startup Ecosystem</h3>
-        <p></p>
-      </div>
-      <div class="slide">
-        <div><img src="img/crunchbase.jpg" style="height: 50px; float: left" alt="Dataset">
-              <img src="img/2013.png" style="height: 300px; " alt="Database">
-        </div>
-      </div>
-    </br>
-    </br>
-    </br>
+.foreground path {
+  fill: none;
+  stroke: steelblue;
+}
 
-      <div class="slide">
-        <div style="margin: 0 auto;"><img src="img/variables.png" style="max-height: 800px; " alt="variables"></div>
-      </div>
-    </section>
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
 
-    <section class="slide">
-      <h1>The Visualization</h1>
-    </section>
+.brush {
+  fill-opacity: 0;
+}
 
-    <section class="slide">
-      <h2 style="text-align: center">Scatter Plot</h2>
-      <svg id="scatter" style="width: 1000px; height: 1000px">
-              </svg>
-      <div class="slide">
-        <p>Gee, Kenzo... A scatter plot again?</p>
-      </div>
-    </section>
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
 
+.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  cursor: move;
+}
+  
+div.tooltip {   
+    color: black;
+    position: absolute;           
+    text-align: center;                          
+    padding: 2px;             
+    font: 12px sans-serif;        
+    background: white;   
+    border: 0px;      
+    border-radius: 8px;           
+    pointer-events: none;         
+  }
 
-    <section class="slide">
-      <h2 style="text-align: center">Parallel Coordinates</h2>
-      <div id="main" class="parcoords" style=" margin: 0 auto;width: 1000px; height: 500px;background-color : transparent;">
+</style>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-laptop"></i> <span>Kenzo Nawa</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." style="" class="img-circle profile_img">
               </div>
-    </section>
+              <div class="profile_info">
+                <h2 style="padding-bottom: 5px; margin-top: -8px;">Data</h2>
+                <h2>Visualization</h2>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!-- /menu profile quick info -->
 
-    
+            <br />
 
-    <section class="slide" >
-      <h2 style="text-align: center">Rectangles</h2>
-      <button id="change">Change</button>
-          <svg id="pretty" style="width: 1000px; height: 500px">
-              </svg>
-    </section>
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Dashboard</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-align-left"></i>RecTransition</a>
+                  </li>
+                  <li><a href="parallel.html"><i class="fa fa-area-chart"></i>Parallel Coordinates</a>
+                  </li>
+                  <li><a href="scatter.html"><i class="fa fa-circle-o"></i> Scatter Plot </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Docs</h3>
+                <ul class="nav side-menu">
+                  <li><a href="documentation.html"><i class="fa fa-file-text"></i> Documentation </a>
 
-    <section class="slide" >
-      <h2 style="text-align: center">Thanks!</h2>
-      <h1>I would love to hear your feedback!</h1>
-    </section>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
 
-    <!-- End slides. -->
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
 
-    <!-- Begin extension snippets. Add or remove as needed. -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>RecTransition</h3>
+              </div>
+            </div>
 
-    <!-- deck.navigation snippet -->
-    <div aria-role="navigation">
-      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
-      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Companies funding and acquisition price</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      Each rectangle represents a company. The darker the rectangle, the more funding the company had. Let's see how the funding affects companies acquisition price.
+                    </br></br></br>
+                    <div ="row">
+                      <div class="col-md-offset-4">
+                        <button type="button" class="btn btn-default btn-md" id="change">GO!</button>
+                      </div>
+                    </div>
+                      <svg id="pretty" style="width: 1000px; height: 500px">
+                          </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Interactive Visual Analytics H590
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
     </div>
 
-    <!-- deck.goto snippet -->
-    <form action="." method="get" class="goto-form">
-      <label for="goto-slide">Go to slide:</label>
-      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
-      <datalist id="goto-datalist"></datalist>
-      <input type="submit" value="Go">
-    </form>
-
-    <!-- End extension snippets. -->
-  </div>
-
-<!-- Required JS files. -->
-<script src="jquery.min.js"></script>
-<script src="core/deck.core.js"></script>
-
-<!-- Extension JS files. Add or remove as needed. -->
-<script src="extensions/menu/deck.menu.js"></script>
-<script src="extensions/goto/deck.goto.js"></script>
-<script src="extensions/navigation/deck.navigation.js"></script>
-<script src="extensions/scale/deck.scale.js"></script>
-
-<!-- Initialize the deck. You can put this in an external file if desired. -->
-<script>
-  $(function() {
-    $.deck('.slide');
-  });
-</script>
-
-<script type="text/javascript" src="test.js"></script>
-<script type="text/javascript" src="js/scatterplot.js"></script>
-<script type="text/javascript" src="js/pretty.js"></script>
-
-</body>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+    <script type="text/javascript" src="js/pretty.js"></script>
+  </body>
 </html>
