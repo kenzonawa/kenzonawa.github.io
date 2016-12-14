@@ -22,61 +22,7 @@
     <!-- D3 -->
     <script src="js/d3.v3.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="js/d3-queue.v3.min.js"></script>
-  <link type="text/css" href="css/d3.parcoords.css" rel="stylesheet">
-  <script src="js/d3.parcoords.js"></script>
 
- <style>
-
-svg {
-  font: 10px sans-serif;
-}
-
-.background path {
-  fill: none;
-  stroke: #ddd;
-  shape-rendering: crispEdges;
-}
-
-.foreground path {
-  fill: none;
-  stroke: steelblue;
-}
-
-.brush .extent {
-  fill-opacity: .3;
-  stroke: #fff;
-  shape-rendering: crispEdges;
-}
-
-.brush {
-  fill-opacity: 0;
-}
-
-.axis line,
-.axis path {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.axis text {
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
-  cursor: move;
-}
-  
-div.tooltip {   
-    color: black;
-    position: absolute;           
-    text-align: center;                          
-    padding: 2px;             
-    font: 12px sans-serif;        
-    background: white;   
-    border: 0px;      
-    border-radius: 8px;           
-    pointer-events: none;         
-  }
-
-</style>
   </head>
 
   <body class="nav-md">
@@ -245,7 +191,16 @@ div.tooltip {
                     </br></br>
                     Once that was done, I noticed it was possible to have somewhat an overview, but information wasn’t really clear. That’s when I decided that I needed some other type of graph that would make it easier for users to see trends in the data. I went to the sketch board and started ideating.
                   </br></br>
-                    (images)
+                    <div class="col-md-55">
+                        <div class="">
+                          <div class="image view view-first">
+                            <img style="width: 100%; display: block;" src="img/sketches.jpg" alt="image" />
+                            <div class="mask">
+                              <p>Sketches</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                     I found that RecTransition was a clear and somewhat fun way to see the trends between the companies. You can easily just follow one company as it transitions from its funding value to its acquisition price, or you can follow a specific color to see how companies within that funding range made it.
 
@@ -262,7 +217,7 @@ div.tooltip {
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Insights</h2>
+                    <h2>Video</h2>
                     <ul class="nav navbar-right panel_toolbox" style="min-width: 0">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -271,15 +226,7 @@ div.tooltip {
                   </div>
                   <div class="x_content">
 
-                    <p>First and foremost, I wanted users to be able to compare different companies and see the relation between funding and acquisition price. For that, I chose Parallel Coordinates because not only would users be able to compare companies, I would also be able to add each companies specific funding (if they went through Series A,B,C, Seed Investment, or VC). 
-                    </br></br>
-                    Once that was done, I noticed it was possible to have somewhat an overview, but information wasn’t really clear. That’s when I decided that I needed some other type of graph that would make it easier for users to see trends in the data. I went to the sketch board and started ideating.
-                  </br></br>
-                    (images)
-
-                    I found that RecTransition was a clear and somewhat fun way to see the trends between the companies. You can easily just follow one company as it transitions from its funding value to its acquisition price, or you can follow a specific color to see how companies within that funding range made it.
-
-                    </p>
+                    <iframe width="560" height="315" class="theVideo" src="https://www.youtube.com/embed/Gvvzg1oLwZ0" frameborder="0" allowfullscreen></iframe>
 
                     <div class="clearfix"></div>
 
@@ -316,6 +263,5 @@ div.tooltip {
     
     <!-- Custom Theme Scripts -->
     <script src="build/js/custom.min.js"></script>
-    <script type="text/javascript" src="js/parallel.js"></script>
   </body>
 </html>
