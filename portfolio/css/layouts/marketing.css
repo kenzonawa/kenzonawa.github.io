@@ -10,21 +10,86 @@
  */
 body {
     line-height: 1.7em;
-    color: #7f8c8d;
+    color: #212121;
     font-size: 13px;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 40px;
+    opacity: 1;
+    transition: 1s opacity;
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s; /* Internet Explorer */
+         -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
 }
 
+body.fade-out {
+    opacity: 0;
+    transition: none;
+}
 
+h1.title{
+    font-family: "Open Sans";
+    font-size: 2.9em;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: -0.027027em;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* This is the subheading that appears on the blue section */
+p.splash-subhead {
+    color: black;
+    margin-top: 20px;
+    font-family: "Open Sans";
+    font-size: 19px;
+    line-height: 1.9em;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-style: normal;
+}
+
+p.subhead2 {
+    color: black;
+    letter-spacing: 0.05em;
+    margin-top: 0px;
+    font-size: 17px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(fonts/Proxima-Nova.otf);
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(fonts/Proxima-Nova-Light.otf);
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(fonts/Proxima-Nova-Thin.otf);
+  font-style: normal;
+  font-weight: 200;
+}
 
 h1 {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 2em;
     letter-spacing: 1px;
 }
 
 h3{
-    font-weight: 100;
+    font-weight: 300;
     font-size: 1.5em;
 }
 h1,
@@ -35,6 +100,14 @@ h5,
 h6,
 label {
     color: #34495e;
+}
+
+p {
+    font-size: 13px;
+    line-height: 1.9em;
+    letter-spacing: 1px;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .pure-img-responsive {
@@ -103,13 +176,47 @@ a.pure-button-primary {
  * I want to customize how my .pure-menu looks at the top of the page
  */
 
+.nav {
+    transition-duration: 0.2s;
+
+    
+  
+  &.is-visible {
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+    -webkit-transition: -webkit-transform .2s,background .3s,color .3s;
+  }
+}
+
+.is-hidden {
+    opacity: 0;
+    -webkit-transform: translate(0,-60px);
+    -webkit-transition: -webkit-transform .2s,background .3s,color .3s,opacity 0 .3s;
+}
+
+.nav-up {
+    top: -64px;
+}
+
+.headroom {
+    will-change: transform;
+    transition: transform 200ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}
+
+
 .home-menu {
     padding: 1em 3em 1em 3em;
     text-align: center;
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
 }
 .home-menu {
-    background: white;
+    background: #3E3F42;
 }
 .pure-menu.pure-menu-fixed {
     /* Fixed menus normally have a border at the bottom. */
@@ -119,7 +226,7 @@ a.pure-button-primary {
 }
 
 .home-menu .pure-menu-heading {
-    color: black;
+    color: white;
     font-weight: 400;
     font-size: 120%;
 }
@@ -179,14 +286,11 @@ a.pure-button-primary {
 
 .intro-video{
     margin-top: 50px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
 }
 
-/* This is the subheading that appears on the blue section */
-.splash-subhead {
-    color: black;
-    letter-spacing: 0.05em;
-    opacity: 0.8;
-    margin-top: 20px;
+
 }
 
 /*
