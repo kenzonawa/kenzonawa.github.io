@@ -42,38 +42,63 @@
     </header>
 </div>
 
-    <!--<div class="information pure-g" style="margin-top: 100px">
-        <div class="pure-u-1 pure-u-md-1-2" >
-            <div class="l-box">
-                <h1>Hi, I'm Kenzo</h1>
+    <div class="information pure-g" style="margin-top: 100px">
+        <div class="pure-u-1 pure-u-md-3-5" >
+            <div class="l-box" style="padding-right: 50px;">
+                <h1 class="title">Hi, I'm Kenzo</h1>
                 <p class="splash-subhead">
-                    Product Designer
+                    Product (UX) Designer
                 </p>
                 <p class="subhead2">
-                    Current Masters in Human-Computer Interaction
+                    I'm a big picture thinker, I tell stories, and I solve problems that affect billions of people. I do this by designing and creating products that matter.
                 </p>
+            <p class="subhead2">
+            For the last year and a bit, I've been working at Google in Mountain View California, leading design on a new product. Unfortunately I can't share any details, mocks, or screenshots with you yet. But when it launches, I'm pretty sure it will change all of our lives.
+            </p>
+            <p class="subhead2">
+            In the meantime, please enjoy my portfolio which is filled with a bunch of work that I completed prior to working at Google. In other words, as you scroll down, you're going back in time :)
+            </p>
             </div>
         </div>
 
-        <div class="pure-u-1 pure-u-md-1-2">
+        <div class="pure-u-1 pure-u-md-2-5">
             <div class="l-box">
-                <iframe width="560" height="315" class="intro-video" src="https://www.youtube.com/embed/4ZkCPhiBmjA" frameborder="0" allowfullscreen></iframe>
+                <h2 class="is-center">
+                    <img class="profile-picture" src="img/profile.png" />
+                </h2>
             </div>
         </div>
-    </div>-->
+    </div>
 
-    <div class="splash">
+    <!--<div class="splash">
         <h1 class="title">Hi, I'm Kenzo</h1>
         <p class="splash-subhead subtitle">
-            Product Designer
+            Product Designer / User Experience Designer
         </p>
         <p class="subhead2">
-            Current Masters in Human-Computer Interaction
+            I'm a big picture thinker, I tell stories, and I solve problems that affect billions of people. I do this by designing and creating products that matter.
+
+            For the last year and a bit, I've been working at Google in Mountain View California, leading design on a new product. Unfortunately I can't share any details, mocks, or screenshots with you yet. But when it launches, I'm pretty sure it will change all of our lives.
+
+            In the meantime, please enjoy my portfolio which is filled with a bunch of work that I completed prior to working at Google. In other words, as you scroll down, you're going back in time :) 
         </p>
 
-        <iframe width="560" height="315" class="intro-video" src="https://www.youtube.com/embed/4ZkCPhiBmjA" frameborder="0" allowfullscreen></iframe>
+    </div>-->
 
+<div class="content-wrapper">
+    <div class="content" style="padding-bottom:0px;">
+        <h2 class="content-head is-center">My UX Process</h2>
+
+        
     </div>
+
+    <div class="content">
+        <h2 class="content-head is-center">
+         <iframe width="560" height="315" class="intro-video " src="https://www.youtube.com/embed/4ZkCPhiBmjA" frameborder="0" allowfullscreen></iframe>
+        </h2>
+    </div> <!-- end information -->
+
+</div>
 
 <div class="content-wrapper">
     <div class="content">
@@ -91,7 +116,8 @@
 
         <div class="pure-u-1 pure-u-md-1-2">
             <div class="l-box">
-                <h3 class="project-description">Sharendipity</h3>
+                <h2 class="project-title">Sharendipity</h2>
+                <p class="project-subtitle"> Product Design </p>
                 <p class="project-description">
                     This project was done in class. We went through all the seps in the product design process. From defining a problem and doing interviews, all the way to creating designs of the product. We learned how to go through the process.
                 </p>
@@ -107,10 +133,12 @@
 
         <div class="pure-u-1 pure-u-md-1-2">
             <div class="l-box">
-                <h3 class="project-description">UniTask</h3>
+                <h2 class="project-title">UniTask</h2>
+                <p class="project-subtitle"> Product Design </p>
                 <p class="project-description">
                     This project was done in class. We went through all the seps in the product design process. From defining a problem and doing interviews, all the way to creating designs of the product. We learned how to go through the process.
                 </p>
+                 <a class="pure-button scene_element scene_element--fadein " href="sharendipity.html" onclick="fadeOut()">Learn More</a>
             </div>
         </div>
 
@@ -131,7 +159,7 @@
     var headroom = new Headroom(header, {
         tolerance: {
           down : 0,
-          up : 5
+          up : 15
         },
         offset : 20
     });

@@ -29,8 +29,18 @@ body.fade-out {
 }
 
 h1.title{
-    font-family: "Open Sans";
+    font-family: "Proxima Nova";
     font-size: 2.9em;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: -0.027027em;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2.title{
+    font-family: "Futura";
+    font-size: 2.2em;
     text-transform: none;
     text-decoration: none;
     letter-spacing: -0.027027em;
@@ -56,9 +66,15 @@ p.subhead2 {
     color: black;
     letter-spacing: 0.05em;
     margin-top: 0px;
-    font-size: 17px;
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: 100;
     font-style: normal;
+    line-height: 1.7em
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url(fonts/Futura.ttc);
 }
 
 @font-face {
@@ -99,7 +115,7 @@ h4,
 h5,
 h6,
 label {
-    color: #34495e;
+    color: black;
 }
 
 p {
@@ -285,7 +301,7 @@ a.pure-button-primary {
 }
 
 .intro-video{
-    margin-top: 50px;
+    margin-top: -20px;
     -moz-border-radius: 8px;
     border-radius: 8px;
 }
@@ -362,8 +378,31 @@ a.pure-button-primary {
     height: auto;
  }
 
+.project-title{
+    font-family: "Futura";
+    font-size: 2.2em;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: -0.027027em;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0px;
+ }
+
+ .project-subtitle{
+    font-family: "Open Sans";
+    font-size: 1.7em;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 300;
+    font-style: normal;
+    margin: 5px 0px 5px 0px;
+ }
+
 .project-description{
-    margin-left: 20px;
+    margin: 0px;
+    margin-bottom: 10px;
 }
 
 /*
@@ -421,4 +460,14 @@ a.pure-button-primary {
     .splash-head {
         font-size: 200%;
     }
+}
+
+.theVideo{
+              left:50%;
+              transform: translateX(-50%);
+              -webkit-transform: translateX(-50%);
+}
+
+.profile-picture{
+    height: 250px;
 }
