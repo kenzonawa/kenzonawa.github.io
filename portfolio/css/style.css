@@ -304,6 +304,9 @@ a.pure-button-primary {
     margin-top: -20px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 315px;
 }
 
 
