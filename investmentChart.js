@@ -173,10 +173,10 @@ function calculateInv(investment) {
 function calculateTotal(amount) {
     amount = parseInt(amount) || 0;
 
-    if (amount < 50000) {
+    /*if (amount < 50000) {
         amount = 50000;
         document.getElementById('amount').value = formatValue(amount);
-    }
+    }*/
 
 
     for(var i = 1; i <= 5; i++) {
