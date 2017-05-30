@@ -68,6 +68,7 @@ var myChart = new Chart(ctx, {
             }
           },
         responsive: true,
+        maintainAspectRatio: false,
         legend: {
             position: 'bottom',
             display: true
