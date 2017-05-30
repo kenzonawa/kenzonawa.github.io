@@ -100,7 +100,6 @@ var myChart = new Chart(ctx, {
 
                         // Convert the array to a string and format the output
                         //value = value.join('.');
-                        if (value == 1) return 'Investment';
                         return 'Year ' + (value-1);
                     }
                 }
@@ -132,19 +131,19 @@ function doGraph(amount) {
     endValue = parseInt(endValue.replace('$', ''));
 
     if(endValue + 10000 > myChart.config.options.scales.yAxes[0].ticks.max) {
-        //console.log("first");
+        console.log("first");
         while(endValue > myChart.config.options.scales.yAxes[0].ticks.max) {
             myChart.config.options.scales.yAxes[0].ticks.max = myChart.config.options.scales.yAxes[0].ticks.max + 10000;
         }
-        //console.log(myChart.config.options.scales.yAxes[0].ticks.max);
+        console.log(myChart.config.options.scales.yAxes[0].ticks.max);
     }
     else {
-        //console.log("second");
+        console.log("second");
         while(endValue + 10000 < myChart.config.options.scales.yAxes[0].ticks.max) {
             myChart.config.options.scales.yAxes[0].ticks.max = myChart.config.options.scales.yAxes[0].ticks.max - 10000;
-            /*if(myChart.config.options.scales.yAxes[0].ticks.max == 90000) {
+            if(myChart.config.options.scales.yAxes[0].ticks.max == 90000) {
                 break;
-            }*/
+            }
         }
     }
 
