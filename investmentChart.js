@@ -2,17 +2,18 @@ var ctx = document.getElementById("myChart");
 ctx.height = 230;
 ctx = ctx.getContext('2d');
 
+
 var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
-gradient1.addColorStop(0, '#6b51f2');
-gradient1.addColorStop(1, '#a18fff');
+gradient1.addColorStop(0, 'rgba(125, 70, 168, 1)');
+gradient1.addColorStop(1, 'rgba(125, 70, 168, 1)');
 
 var gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
-gradient2.addColorStop(0, '#1ee8ea');
-gradient2.addColorStop(1, '#44ebec');
+gradient2.addColorStop(0, 'rgba(98, 181, 255, 1)');
+gradient2.addColorStop(1, 'rgba(98, 181, 255, 1)');
 
 var gradient3 = ctx.createLinearGradient(0, 0, 0, 400);
-gradient3.addColorStop(0, '#dd4dab');
-gradient3.addColorStop(1, '#7746ab');
+gradient3.addColorStop(0, 'rgba(255, 98, 102, 1)');
+gradient3.addColorStop(1, 'rgba(255, 98, 102, 1)');
 
 var dataUS = ['50000', '50880', '51775', '52687','53614', '54558'];
 var dataCapital = ['50000', '51150', '52326', '53530', '54761','56021'];
@@ -27,7 +28,7 @@ var myChart = new Chart(ctx, {
                 data: dataUS,
                 backgroundColor: gradient3,
                 pointBackgroundColor: '#fff',
-                pointRadius : 4,
+                pointRadius : 0,
                 pointBorderWidth: 4,
                 pointBorderColor: 'rgba(0,0,0,0.2)',
                 label: 'US Treasury Bond'
@@ -36,7 +37,7 @@ var myChart = new Chart(ctx, {
                 data: dataCapital,
                 backgroundColor: gradient2,
                 pointBackgroundColor: '#fff',
-                pointRadius : 4,
+                pointRadius : 0,
                 pointBorderWidth: 4,
                 pointBorderColor: 'rgba(0,0,0,0.2)',
                 label: 'Capital One 360 CD'
@@ -45,7 +46,7 @@ var myChart = new Chart(ctx, {
                 data: dataGramercy,
                 backgroundColor: gradient1,
                 pointBackgroundColor: '#fff',
-                pointRadius : 4,
+                pointRadius : 0,
                 pointBorderWidth: 4,
                 pointBorderColor: 'rgba(0,0,0,0.2)',
                 label: 'Gramercy District Phase 1A'
@@ -68,7 +69,8 @@ var myChart = new Chart(ctx, {
           },
         responsive: true,
         legend: {
-            display: false
+            position: 'bottom',
+            display: true
         },
         scales: {
             yAxes: [{
