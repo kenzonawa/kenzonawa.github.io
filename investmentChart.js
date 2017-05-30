@@ -101,7 +101,7 @@ var myChart = new Chart(ctx, {
 
                         // Convert the array to a string and format the output
                         //value = value.join('.');
-                        //if (value == 1) return 'Investment';
+                        if (value == 1) return '';
                         return 'Year ' + (value-1);
                     }
                 }
