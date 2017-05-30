@@ -69,7 +69,7 @@ var myChart = new Chart(ctx, {
           },
         responsive: true,
         legend: {
-            position: 'bottom',
+            //position: 'bottom',
             display: true
         },
         scales: {
