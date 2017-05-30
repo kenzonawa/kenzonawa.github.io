@@ -67,7 +67,7 @@ var myChart = new Chart(ctx, {
                   }
             }
           },
-        responsive: false,
+        responsive: true,
         legend: {
             position: 'bottom',
             display: true
