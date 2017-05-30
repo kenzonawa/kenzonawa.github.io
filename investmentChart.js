@@ -68,8 +68,7 @@ var myChart = new Chart(ctx, {
           },
         responsive: true,
         legend: {
-            position: 'bottom',
-            display: true
+            display: false
         },
         scales: {
             yAxes: [{
