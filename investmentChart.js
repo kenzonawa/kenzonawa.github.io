@@ -69,7 +69,7 @@ var myChart = new Chart(ctx, {
           },
         responsive: true,
         legend: {
-            //position: 'bottom',
+            position: 'bottom',
             display: true
         },
         scales: {
@@ -101,7 +101,7 @@ var myChart = new Chart(ctx, {
 
                         // Convert the array to a string and format the output
                         //value = value.join('.');
-                        if (value == 1) return 'Investment';
+                        //if (value == 1) return 'Investment';
                         return 'Year ' + (value-1);
                     }
                 }
