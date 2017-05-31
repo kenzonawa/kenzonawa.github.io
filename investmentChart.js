@@ -113,9 +113,9 @@ var myChart = new Chart(ctx, {
 calculateTotal(50000);
 
 document.getElementById('amount').onchange = function(){
-    this.value = normalizeValue(this.value);
-    console.log(parseInt(this.value));
-    doGraph(parseInt(this.value));
+    value = normalizeValue(this.value);
+    this.value = formatValue(this.value)
+    doGraph(parseInt(value));
 }
 
 function doGraph(amount) {
