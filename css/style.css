@@ -53,6 +53,7 @@
     border-color: green;
   }
 
+
     .progress-bar-active{
     counter-reset: step;
   }
