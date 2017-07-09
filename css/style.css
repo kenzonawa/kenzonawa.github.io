@@ -52,3 +52,7 @@
   .progress-bar li.active:before{
     border-color: green;
   }
+
+  .progress-bar li.active + li:after{
+    background-color: green;
+  }
