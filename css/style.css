@@ -53,6 +53,10 @@
     border-color: green;
   }
 
+ .progress-bar li.active + li:after{
+    background-color: green;
+  }
+
 
     .progress-bar-active{
     counter-reset: step;
