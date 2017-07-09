@@ -45,6 +45,14 @@
     content: none;
   }
 
+  .progress-bar li.active{
+    color: green;
+  }
+
+  .progress-bar li.active:before{
+    border-color: green;
+  }
+
     .progress-bar-active{
     counter-reset: step;
   }

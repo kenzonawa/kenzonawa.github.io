@@ -4,7 +4,7 @@ $(window).scroll(function() {
     var scroll = $(window).scrollTop();
 
     if(scroll >= 500) {
-        $(".header").addClass(".change");
+        $("#step2").addClass(".active");
     } else {
         $(".header").removeClass(".change");
     }
