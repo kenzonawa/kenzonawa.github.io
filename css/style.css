@@ -45,14 +45,43 @@
     content: none;
   }
 
-  .progress-bar li.active{
-    color: green;
-  }  
-
-  .progress-bar li.active:before{
-    border-color: green;
+    .progress-bar-active{
+    counter-reset: step;
+  }
+  
+  .progress-bar-active li{
+    list-style-type: none;
+    float: left;
+    width: 33.33%;
+    position: relative;
+    text-align: center;
+  }
+  
+  .progress-bar-active li:before{
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #65E52D;
+    display: block;
+    text-align: center;
+    margin: 0px auto 10px auto;
+    border-radius: 50%;
+    background-color: white;
   }
 
-  .progress-bar li.active + li:after{
-    background-color: green;
+ .progress-bar-active li:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #65E52D;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+  }
+
+  .progress-bar-active li:first-child:after {
+    content: none;
   }
