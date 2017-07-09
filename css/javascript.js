@@ -9,13 +9,14 @@ $(window).scroll(function() {
     var block2 = $("#block2").offset().top-100;
     var block3 = $("#block3").offset().top-100;
 
-    showUp(block1,"#step1");
-    showUp(block2,"#step2");
-    showUp(block3,"#step3");
+    showUp(scroll, block1,"#step1");
+    showUp(scroll, block2,"#step2");
+    showUp(scroll, block3,"#step3");
 
 });
 
-function showUp(block,id){
+function showUp(scroll, block, id){
+    console.log("I'm in "+scroll+block+id);
     if(scroll >= block) {
         $(id).addClass("active");
     }
