@@ -29,4 +29,25 @@
     border-radius: 50%;
     background-color: white;
   }
-  
+
+ .progress-bar li:after{
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+  }
+
+  .progress-bar li:first-child:after {
+    content: none;
+  }
+
+  .progress-bar li.active{
+    color: green;
+  }  
+
+  .progress-bar li.active:before{
+    border-color: green;
+  }
