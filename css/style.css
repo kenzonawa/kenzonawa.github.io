@@ -1,0 +1,32 @@
+  .titleHR {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(63, 136, 197, 0.3);
+}
+  .progress-bar{
+  	counter-reset: step;
+  }
+  
+  .progress-bar li{
+  	list-style-type: none;
+    float: left;
+    width: 33.33%;
+    position: relative;
+    text-align: center;
+  }
+  
+  .progress-bar li:before{
+  	content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    display: block;
+    text-align: center;
+    margin: 0px auto 10px auto;
+    border-radius: 50%;
+    background-color: white;
+  }
+  
