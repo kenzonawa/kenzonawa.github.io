@@ -16,7 +16,7 @@
     text-align: center;
   }
 
-   .progress-bar + .sharen li{
+   .progress-bar.sharen li{
     list-style-type: none;
     float: left;
     width: 12.5%;
