@@ -5,17 +5,17 @@ console.log("loaded");
 $(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
-    var block1 = $("#block1").offset().top-150;
-    var block2 = $("#block2").offset().top-150;
-    var block3 = $("#block3").offset().top-150;
-    var block4 = $("#block4").offset().top-150;
-    var block5 = $("#block5").offset().top-150;
-    var block6 = $("#block6").offset().top-150;
-    var block7 = $("#block7").offset().top-150;
-    var block8 = $("#block8").offset().top-150;
-    var block9 = $("#block9").offset().top-150;
-    var block10 = $("#block10").offset().top-150;
-    var block11 = $("#block11").offset().top-150;
+    var block1 = $("#block1").offset().top-200;
+    var block2 = $("#block2").offset().top-200;
+    var block3 = $("#block3").offset().top-200;
+    var block4 = $("#block4").offset().top-200;
+    var block5 = $("#block5").offset().top-200;
+    var block6 = $("#block6").offset().top-200;
+    var block7 = $("#block7").offset().top-200;
+    var block8 = $("#block8").offset().top-200;
+    var block9 = $("#block9").offset().top-200;
+    var block10 = $("#block10").offset().top-200;
+    var block11 = $("#block11").offset().top-200;
 
 
     showUp(scroll, block1,"#step1");
