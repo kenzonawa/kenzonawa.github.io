@@ -15,6 +15,14 @@
     position: relative;
     text-align: center;
   }
+
+   .progress-bar + .sharen li{
+    list-style-type: none;
+    float: left;
+    width: 12.5%;
+    position: relative;
+    text-align: center;
+  }
   
   .progress-bar li:before{
   	content: counter(step);
