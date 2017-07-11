@@ -78,10 +78,6 @@
     color: #00B362;
   }
 
-  .progress-bar li.active:after{
-    border-color: #00B362;
-  }
-
- .progress-bar li.active + li:after{
+ .progress-bar li.active:after{
     background-color: #00B362;
   }
