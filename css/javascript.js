@@ -5,6 +5,7 @@ console.log("loaded");
 $(window).scroll(function() {    
     var scroll = $(window).scrollTop();
 
+    if($("#block1")) console.log("LOADED TWICE");
     var block1 = $("#block1").offset().top-200;
     var block2 = $("#block2").offset().top-200;
     var block3 = $("#block3").offset().top-200;
