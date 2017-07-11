@@ -14,10 +14,6 @@
     width: 9.09%;
     position: relative;
     text-align: center;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
   }
   
   .progress-bar li:before{
@@ -32,10 +28,10 @@
     margin: 0px auto 10px auto;
     border-radius: 50%;
     background-color: white;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 
   }
 
@@ -48,10 +44,10 @@
     top: 15px;
     left: -50%;
     z-index: -1;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   .progress-bar li:first-child:after {
