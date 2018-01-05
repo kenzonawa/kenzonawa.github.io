@@ -11,12 +11,15 @@ html, body {
   overflow: hidden;
   overflow-y: auto;
 }
+
 .js .deck-container {
   visibility: hidden;
 }
+
 .ready .deck-container {
   visibility: visible;
 }
+
 .touch .deck-container {
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
@@ -52,9 +55,14 @@ html, body {
   position: static;
   z-index: 2;
 }
+
 .deck-child-current .slide {
   visibility: hidden;
 }
+
 .deck-child-current .deck-previous, .deck-child-current .deck-before, .deck-child-current .deck-current {
   visibility: visible;
 }
+ 
+
+ /*# sourceMappingURL= deck.core.css.map */

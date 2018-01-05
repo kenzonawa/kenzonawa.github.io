@@ -24,6 +24,7 @@ footer, header, hgroup, menu, nav, section {
 blockquote, q {
   quotes: none;
 }
+
 blockquote:before, blockquote:after, q:before, q:after {
   content: "";
   content: none;
@@ -78,8 +79,9 @@ pre, code, kbd, samp {
 }
 
 a {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
+
 a:hover, a:active {
   outline: none;
 }
@@ -155,6 +157,7 @@ input:invalid, textarea:invalid {
   -webkit-box-shadow: 0px 0px 5px red;
   box-shadow: 0px 0px 5px red;
 }
+
 input:invalid .no-boxshadow, textarea:invalid .no-boxshadow {
   background-color: #f0dddd;
 }
@@ -165,15 +168,17 @@ button {
 }
 
 select, input, textarea {
-  color: #444444;
+  color: #444;
 }
 
 a {
   color: #607890;
 }
+
 a:hover, a:focus {
   color: #036;
 }
+
 a:link {
   -webkit-tap-highlight-color: #fff;
 }
@@ -189,6 +194,7 @@ h1, .vcenter {
   padding-top: 1em;
   max-height: 100%;
 }
+
 .csstransforms h1, .csstransforms .vcenter {
   padding: 0 48px;
   position: absolute;
@@ -274,6 +280,7 @@ li {
   padding: .25em 0;
   vertical-align: middle;
 }
+
 li > ol, li > ul {
   margin-bottom: inherit;
 }
@@ -318,9 +325,11 @@ blockquote {
   color: #000;
   border-left: 5px solid #ccc;
 }
+
 blockquote p {
   margin: 0;
 }
+
 blockquote cite {
   font-size: .5em;
   font-style: normal;
@@ -342,6 +351,7 @@ a, a:hover, a:focus, a:active, a:visited {
   color: #c00;
   text-decoration: none;
 }
+
 a:hover, a:focus {
   text-decoration: underline;
 }
@@ -351,6 +361,7 @@ a:hover, a:focus {
   font-size: 1.75em;
   background: #fff;
 }
+
 .deck-container > .slide {
   padding: 0 48px;
 }
@@ -358,9 +369,11 @@ a:hover, a:focus {
 .slide .deck-before, .slide .deck-previous {
   opacity: 0.4;
 }
+
 .slide .deck-before:not(.deck-child-current) .deck-before, .slide .deck-before:not(.deck-child-current) .deck-previous, .slide .deck-previous:not(.deck-child-current) .deck-before, .slide .deck-previous:not(.deck-child-current) .deck-previous {
   opacity: 1;
 }
+
 .slide .deck-child-current {
   opacity: 1;
 }
@@ -369,9 +382,11 @@ a:hover, a:focus {
   background: #ccc;
   font-family: serif;
 }
+
 .deck-prev-link, .deck-prev-link:hover, .deck-prev-link:focus, .deck-prev-link:active, .deck-prev-link:visited, .deck-next-link, .deck-next-link:hover, .deck-next-link:focus, .deck-next-link:active, .deck-next-link:visited {
   color: #fff;
 }
+
 .deck-prev-link:hover, .deck-prev-link:focus, .deck-next-link:hover, .deck-next-link:focus {
   background: #c00;
   text-decoration: none;
@@ -384,6 +399,10 @@ a:hover, a:focus {
 .deck-menu .slide {
   background: #eee;
 }
+
 .deck-menu .deck-current, .no-touch .deck-menu .slide:hover {
   background: #ddf;
 }
+ 
+
+ /*# sourceMappingURL= swiss.css.map */

@@ -182,7 +182,7 @@
           .attr("dy", ".71em")
           .style("text-anchor", "middle")
           .style("font-size", "12px")
-          .text("funding");;
+          .text("FUNDING");;
         
         svg.append("g")
           .attr("transform", "translate(399,0)")
@@ -194,7 +194,7 @@
           .attr("dy", ".71em")
           .style("text-anchor", "middle")
           .style("font-size", "12px")
-          .text("acquisition price");;
+          .text("ACQUISITION PRICE");;
 
          for (var i =0; i<5; i++){
           noDup[i] = lastScale[i].filter(function(item, pos) {

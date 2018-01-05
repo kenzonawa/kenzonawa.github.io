@@ -1,0 +1,87 @@
+$primary-accent: #606BE0;
+$secondary-accent: #FA7D57;
+$primary-background: #E6E8FF;
+$secondary-background: #FFEDE6;
+$primary-text: #353345;
+$secondary-text: #5B596E;
+$terciary-text: #ACADBF;
+
+
+body {
+    color: $primary-text;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 1.875em;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.375em;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 4em;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 4em;
+    font-weight: 500;
+}
+
+.hero-container {
+    margin: auto;
+    h1,h2,h3 {
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    h2 {
+        margin-top: 0;
+        color: $secondary-accent;
+    }
+   
+//    h2::before {
+//         content: '';
+//         display: inline-block;
+//         width: 50px;
+//         height: 5px;
+//         margin-bottom: 8px;
+//         margin-right: 0vw;
+//         background-color: $secondary-accent;
+//    }
+}
+
+.hero-container {
+    max-width: 640px;
+}
+
+.line-one {
+    position: relative;
+    background-color: $secondary-accent;
+    width: 50px;
+    height: 5px;
+    margin: auto;
+    top: 24px;
+    right: 40%;
+}
+
+.line-two{
+    position: relative;
+    background-color: $secondary-accent;
+    width: 50px;
+    height: 5px;
+    margin: auto;
+    top: 19px;
+    left: 40%;
+}

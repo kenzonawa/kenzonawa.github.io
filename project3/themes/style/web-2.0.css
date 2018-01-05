@@ -25,6 +25,7 @@ footer, header, hgroup, menu, nav, section {
 blockquote, q {
   quotes: none;
 }
+
 blockquote:before, blockquote:after, q:before, q:after {
   content: "";
   content: none;
@@ -79,8 +80,9 @@ pre, code, kbd, samp {
 }
 
 a {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
+
 a:hover, a:active {
   outline: none;
 }
@@ -156,6 +158,7 @@ input:invalid, textarea:invalid {
   -webkit-box-shadow: 0px 0px 5px red;
   box-shadow: 0px 0px 5px red;
 }
+
 input:invalid .no-boxshadow, textarea:invalid .no-boxshadow {
   background-color: #f0dddd;
 }
@@ -166,15 +169,17 @@ button {
 }
 
 select, input, textarea {
-  color: #444444;
+  color: #444;
 }
 
 a {
   color: #607890;
 }
+
 a:hover, a:focus {
   color: #036;
 }
+
 a:link {
   -webkit-tap-highlight-color: #fff;
 }
@@ -190,6 +195,7 @@ h1, .vcenter {
   padding-top: 1em;
   max-height: 100%;
 }
+
 .csstransforms h1, .csstransforms .vcenter {
   padding: 0 48px;
   position: absolute;
@@ -275,6 +281,7 @@ li {
   padding: .25em 0;
   vertical-align: middle;
 }
+
 li > ol, li > ul {
   margin-bottom: inherit;
 }
@@ -303,6 +310,7 @@ h2 {
   color: #0b7495;
   border-bottom: 0;
 }
+
 .cssreflections h2 {
   line-height: 1;
   -webkit-box-reflect: below -0.5555em -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.3, transparent), color-stop(0.7, rgba(255, 255, 255, 0.1)), to(transparent));
@@ -321,6 +329,7 @@ pre {
   border-radius: 5px;
   /* http://nicolasgallagher.com/css-drop-shadows-without-images/ */
 }
+
 .csstransforms.boxshadow pre > :first-child:before {
   content: "";
   position: absolute;
@@ -331,6 +340,7 @@ pre {
   left: 0;
   right: 0;
 }
+
 .csstransforms.boxshadow pre:before, .csstransforms.boxshadow pre:after {
   content: "";
   position: absolute;
@@ -341,12 +351,14 @@ pre {
   max-width: 300px;
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
 }
+
 .csstransforms.boxshadow pre:before {
   left: 10px;
   -webkit-transform: rotate(-3deg);
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg);
 }
+
 .csstransforms.boxshadow pre:after {
   right: 10px;
   -webkit-transform: rotate(3deg);
@@ -369,6 +381,7 @@ blockquote {
   z-index: auto;
   border-radius: 5px;
 }
+
 .boxshadow blockquote > :first-child:before {
   content: "";
   position: absolute;
@@ -379,6 +392,7 @@ blockquote {
   left: 0;
   right: 0;
 }
+
 .boxshadow blockquote:after {
   content: "";
   position: absolute;
@@ -391,15 +405,18 @@ blockquote {
   border-radius: 10px / 100px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
 }
+
 blockquote p {
   margin: 0;
 }
+
 blockquote cite {
   font-size: .5em;
   font-style: normal;
   font-weight: bold;
   color: #888;
 }
+
 blockquote:before {
   content: "“";
   position: absolute;
@@ -425,6 +442,7 @@ a, a:hover, a:focus, a:active, a:visited {
   color: #599;
   text-decoration: none;
 }
+
 a:hover, a:focus {
   text-decoration: underline;
 }
@@ -449,6 +467,7 @@ a:hover, a:focus {
   background-attachment: fixed;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
+
 .deck-container > .slide {
   padding: 0 48px;
 }
@@ -456,9 +475,11 @@ a:hover, a:focus {
 .slide .deck-before, .slide .deck-previous {
   opacity: 0.4;
 }
+
 .slide .deck-before:not(.deck-child-current) .deck-before, .slide .deck-before:not(.deck-child-current) .deck-previous, .slide .deck-previous:not(.deck-child-current) .deck-before, .slide .deck-previous:not(.deck-child-current) .deck-previous {
   opacity: 1;
 }
+
 .slide .deck-child-current {
   opacity: 1;
 }
@@ -467,9 +488,11 @@ a:hover, a:focus {
   background: #fff;
   opacity: 0.5;
 }
+
 .deck-prev-link, .deck-prev-link:hover, .deck-prev-link:focus, .deck-prev-link:active, .deck-prev-link:visited, .deck-next-link, .deck-next-link:hover, .deck-next-link:focus, .deck-next-link:active, .deck-next-link:visited {
   color: #599;
 }
+
 .deck-prev-link:hover, .deck-prev-link:focus, .deck-next-link:hover, .deck-next-link:focus {
   opacity: 1;
   text-decoration: none;
@@ -483,9 +506,11 @@ a:hover, a:focus {
   background: transparent;
   border-radius: 5px;
 }
+
 .rgba .deck-menu .slide {
   background: rgba(0, 0, 0, 0.1);
 }
+
 .deck-menu .slide.deck-current, .rgba .deck-menu .slide.deck-current, .no-touch .deck-menu .slide:hover {
   background: #fff;
 }
@@ -495,6 +520,10 @@ a:hover, a:focus {
   border: 1px solid #cde;
   border-radius: 5px;
 }
+
 .boxshadow .goto-form {
   box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
+ 
+
+ /*# sourceMappingURL= web-2.0.css.map */

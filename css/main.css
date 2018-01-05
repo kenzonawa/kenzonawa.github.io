@@ -1,0 +1,140 @@
+
+/* GENERAL */
+
+html, body {
+    position: relative;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.title {
+    letter-spacing: 3px;
+}
+
+.subtitle{
+    letter-spacing: 5px;
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* HOME HERO */
+.hero-section{
+    height: 120vh;
+    min-height: 720px;
+    width: 100%;
+    background-color: #F0F1F2;
+    overflow: hidden;
+}
+
+.home-hero{
+    width: 100%;
+
+    display: block;
+    position: absolute;
+}
+
+.home-skewed{
+    min-height: 620px;
+    -ms-transform: skewY(-8deg); /* IE 9 */
+    -webkit-transform: skewY(-8deg); /* Safari */
+    transform: skewY(-8deg); /* Standard syntax */
+}
+
+.half{
+    height: 310px;
+}
+
+.home-gradient{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#100c2a+0,063136+100 */
+    background: #100c2a; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #100c2a 0%, #063136 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #100c2a 0%,#063136 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #100c2a 0%,#063136 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#100c2a', endColorstr='#063136',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+#app{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 20%;
+}
+@media (max-width: 750px) {
+  #app{
+    visibility: hidden;
+  }
+}
+
+
+.phone{
+    height: 640px;
+    width: 800px;;
+}
+
+/* NAV BAR */
+.navbar {
+  margin-bottom: 10px;
+  padding-top: 24px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: right;
+}
+
+.navbar li {
+    float: left;
+    margin: 8px 16px;
+    font-size: 14px;
+}
+
+.navbar li a {
+    display: block;
+    color: #353345;
+    text-align: center;
+    padding: 8px 20px;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: #eee;
+}
+
+/* HERO CONTENT */
+
+.hero-container {
+    margin-left: 10%;
+    position: relative;
+    margin-top: 30vh;
+    max-width: 640px;
+}
+
+.hero-title{
+    font-weight: 500;
+}
+
+.hero-subtitle{
+    font-weight: 400;
+}
+
+.hero-description{
+    font-weight: 200;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+}
+
+/* Full STACK */
+.filler {
+    height: 20vh;
+}
+
+
