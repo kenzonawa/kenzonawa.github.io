@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2189px" height="1353px" viewBox="0 0 2189 1353" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard-7" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Line-2" transform="translate(535.500000, 668.000000) scale(1, -1) translate(-535.500000, -668.000000) translate(514.000000, 200.000000)">
+            <path d="M21.5,0.5 L21.5,914.465535" stroke="#373A40" stroke-width="6" stroke-linecap="square"></path>
+            <polygon id="Arrowhead" fill="#373A40" transform="translate(21.500000, 914.465535) rotate(-90.000000) translate(-21.500000, -914.465535) " points="42.5 935.465535 0.5 914.465535 42.5 893.465535"></polygon>
+        </g>
+        <g id="Line-2-Copy" transform="translate(1003.500000, 1136.000000) scale(-1, 1) translate(-1003.500000, -1136.000000) translate(536.000000, 1115.000000)">
+            <path d="M934.965535,21 L21,21" stroke="#373A40" stroke-width="6" stroke-linecap="square"></path>
+            <polygon id="Arrowhead" fill="#373A40" points="42 42 0 21 42 0"></polygon>
+        </g>
+        <text id="Time-to-set-reminder" font-family="SFProDisplay-Medium, SF Pro Display" font-size="48" font-weight="400" letter-spacing="2.99000001" fill="#373A40">
+            <tspan x="1369" y="1238">Time to set </tspan>
+            <tspan x="1369" y="1296">reminde</tspan>
+            <tspan x="1558.72688" y="1296">r</tspan>
+        </text>
+        <text id="Negative-Consequence" font-family="SFProDisplay-Medium, SF Pro Display" font-size="48" font-weight="400" letter-spacing="2.99000001" fill="#373A40">
+            <tspan x="269.54875" y="209">Negative </tspan>
+            <tspan x="159.998437" y="267">Consequenc</tspan>
+            <tspan x="453.664062" y="267">e</tspan>
+        </text>
+        <path d="M561.5,1105.5 L1471.29366,195.706342" id="Line" stroke="#0A80F0" stroke-width="6" stroke-linecap="square"></path>
+        <circle id="Oval-2" fill="#9EA2A6" cx="1271.5" cy="394.5" r="22.5"></circle>
+        <circle id="Oval-2-Copy" fill="#9EA2A6" cx="1164.5" cy="500.5" r="22.5"></circle>
+        <circle id="Oval-2-Copy-2" fill="#373A40" cx="779.5" cy="887.5" r="22.5"></circle>
+        <text id="Google" font-family="SFProDisplay-Light, SF Pro Display" font-size="72" font-weight="300" letter-spacing="4.53999996" fill="#9EA2A6">
+            <tspan x="985.620313" y="363">Googl</tspan>
+            <tspan x="1185.4375" y="363">e</tspan>
+        </text>
+        <text id="Apple" font-family="SFProDisplay-Light, SF Pro Display" font-size="72" font-weight="300" letter-spacing="4.53999996" fill="#9EA2A6">
+            <tspan x="891.785313" y="508">Appl</tspan>
+            <tspan x="1045.4375" y="508">e</tspan>
+        </text>
+        <text id="Target" font-family="SFProDisplay-Light, SF Pro Display" font-size="72" font-weight="300" letter-spacing="4.53999996" fill="#373A40">
+            <tspan x="873.592969" y="911">Targe</tspan>
+            <tspan x="1058.53906" y="911">t</tspan>
+        </text>
+        <rect id="Rectangle-5" fill="#9EA2A6" transform="translate(1659.000000, 439.000000) scale(-1, 1) translate(-1659.000000, -439.000000) " x="1656" y="210" width="6" height="458"></rect>
+        <rect id="Rectangle-5-Copy" fill="#373A40" transform="translate(1659.000000, 918.000000) scale(-1, 1) translate(-1659.000000, -918.000000) " x="1656" y="768" width="6" height="300"></rect>
+        <rect id="Rectangle-5-Copy-2" fill="#373A40" transform="translate(1642.000000, 771.000000) scale(-1, 1) rotate(90.000000) translate(-1642.000000, -771.000000) " x="1639" y="751" width="6" height="40"></rect>
+        <rect id="Rectangle-5-Copy-4" fill="#9EA2A6" transform="translate(1642.000000, 665.000000) scale(-1, 1) rotate(90.000000) translate(-1642.000000, -665.000000) " x="1639" y="645" width="6" height="40"></rect>
+        <rect id="Rectangle-5-Copy-5" fill="#9EA2A6" transform="translate(1642.000000, 213.000000) scale(-1, 1) rotate(90.000000) translate(-1642.000000, -213.000000) " x="1639" y="193" width="6" height="40"></rect>
+        <rect id="Rectangle-5-Copy-3" fill="#373A40" transform="translate(1642.000000, 1065.000000) scale(-1, 1) rotate(90.000000) translate(-1642.000000, -1065.000000) " x="1639" y="1045" width="6" height="40"></rect>
+        <text id="Important-Tasks" font-family="SFProDisplay-Light, SF Pro Display" font-size="72" font-weight="300" line-spacing="131" letter-spacing="4.53999996" fill="#9EA2A6">
+            <tspan x="1741" y="377">Important </tspan>
+            <tspan x="1741" y="508">Task</tspan>
+            <tspan x="1892.61312" y="508">s</tspan>
+        </text>
+        <text id="Small-Tasks" font-family="SFProDisplay-Light, SF Pro Display" font-size="72" font-weight="300" line-spacing="110" letter-spacing="4.53999996" fill="#373A40">
+            <tspan x="1741" y="932">Small Task</tspan>
+            <tspan x="2095.56406" y="932">s</tspan>
+        </text>
+    </g>
+</svg>
